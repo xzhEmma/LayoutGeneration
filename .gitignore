@@ -1,9 +1,11 @@
-data/caches/glove.840B.300d.zip
-data/caches/glove.840B.300d.txt.pt
-data/caches/
-data/caches
-/data/
-/lib/SceneGraphParser/
+#data/caches/glove.840B.300d.zip
+#data/caches/glove.840B.300d.txt.pt
+#data/caches/
+#data/caches
+/data/coco
+/data/graphs_txt1
+/data/graphs_txt2
+#/lib/SceneGraphParser/
 
 # Created by https://www.toptal.com/developers/gitignore/api/linux,archlinuxpackages,python,macos,vscode
 # Edit at https://www.toptal.com/developers/gitignore?templates=linux,archlinuxpackages,python,macos,vscode
