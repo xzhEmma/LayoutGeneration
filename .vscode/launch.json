@@ -1,0 +1,19 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+
+
+        {
+            "name": "Python: train_abstract_scene.py",
+            "type": "python",
+            "request": "launch",
+            "program": "./tools/train_abstract_scene.py",
+            "console": "integratedTerminal",
+            "args": [
+                "--cuda",
+                "--batch_size",
+                "12"
+            ]
+        }
+    ]
+}
