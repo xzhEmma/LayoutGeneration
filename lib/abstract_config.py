@@ -5,8 +5,8 @@ import argparse
 import os.path as osp
 
 
-this_dir = osp.dirname(__file__)
-
+this_dir =osp.dirname(__file__)
+#this_dir = '/root/data/xzh/LayoutGeneration'
 
 def str2bool(v):
     return v.lower() in ('true', '1')
@@ -69,7 +69,7 @@ parser.add_argument('--attn_emb',      type=str2bool, default=True)
 parser.add_argument('--what_attn', type=str2bool, default=True, help='whether to attention for object prediction')
 parser.add_argument('--where_attn', type=int, default=2, help='whether to attention for attribute prediction')
 
-parser.add_argument('--sg', type=str2bool, default=True)
+parser.add_argument('--loc_attn', type=str2bool, default=True)
 
 # Decoders
 parser.add_argument('--use_bg_to_pred', type=str2bool, default=False, help='whether to use S_t for object prediction, not helpful')
@@ -91,8 +91,8 @@ parser.add_argument('--n_samples', type=int, default=10)#100
 parser.add_argument('--n_epochs',  type=int, default=50)
 
 # loss weights
-parser.add_argument('--pose_loss_weight',  type=float, default=2.0)
-parser.add_argument('--expr_loss_weight',  type=float, default=2.0)
+parser.add_argument('--pose_loss_weight',  type=float, default=3.0)
+parser.add_argument('--expr_loss_weight',  type=float, default=3.0)
 parser.add_argument('--coord_loss_weight', type=float, default=2.0)
 parser.add_argument('--scale_loss_weight', type=float, default=2.0)
 parser.add_argument('--ratio_loss_weight', type=float, default=2.0)
@@ -104,7 +104,7 @@ parser.add_argument('--eos_loss_weight',   type=float, default=0.0)
 ##################################################################
 # evaluation
 ##################################################################
-parser.add_argument('--pretrained', type=str, default='ckpt-049-5.4436-0.4806')#'ckpt-007-5.1716-0.4904')
+parser.add_argument('--pretrained', type=str, default=None)#'ckpt-027-7.3685-0.4503')
 parser.add_argument('--rel_mode', type=int, default=1, help='relation distance mode, 0 for L2, 1 for polar')
 parser.add_argument('--sigmas', default=[0.2, 0.2, 0.2, 0.2], help='gaussian kernel size used in evaluation')
 parser.add_argument('--recall_weight', type=float, default=9.0, help="F3 score, deprecated")

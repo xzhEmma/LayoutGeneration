@@ -164,7 +164,7 @@ class Vocab(object):
         self.word2index = vocab_info['word2index']
         self.word2count = vocab_info['word2count']
         self.index2word = vocab_info['index2word']
-        self.rel2index = vocab_info['rel2index']
+      #  self.rel2index = vocab_info['rel2index']
         self.n_words = len(self.index2word)
 
     def save(self, path):
