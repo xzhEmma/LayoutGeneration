@@ -200,9 +200,9 @@ class SupervisedTrainer(object):
             ##################################################################
             ## Training  
             ##################################################################
-            torch.cuda.empty_cache()
-            train_pred_loss, train_attn_loss, train_eos_loss, train_accu = \
-                self.train_epoch(train_db, optimizer, epoch)
+            # torch.cuda.empty_cache()
+            # train_pred_loss, train_attn_loss, train_eos_loss, train_accu = \
+            #     self.train_epoch(train_db, optimizer, epoch)
                 
             ##################################################################
             ## Validation

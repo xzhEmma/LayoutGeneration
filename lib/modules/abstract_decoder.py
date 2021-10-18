@@ -7,7 +7,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 from modules.conv_rnn import ConvGRU, ConvLSTM
-from modules.attention import Attention, LOC_Attention
+from modules.attention import Attention, LOC_Attention, SELF_Attention
 from abstract_utils import Flatten, indices2onehots
 from modules.DSGA import GCN
 
@@ -28,7 +28,7 @@ class WhatDecoder(nn.Module):
         emb_dim = config.n_embed#300
         bgf_dim = config.n_conv_hidden
         fgf_dim = config.output_cls_size #61
-        sg_dim = config.obj_embed #1024
+   
         #################################################################
         # Conv RNN
         #################################################################
@@ -77,6 +77,7 @@ class WhatDecoder(nn.Module):
             if self.cfg.use_fg_to_pred == 2:
                 in_dim += fgf_dim 
             self.attention = Attention(config.attn_type, out_dim, in_dim,config)
+            self.self_attn = SELF_Attention(config.attn_type,512)
         #################################################################
         # Segment pooling
         #################################################################
@@ -246,11 +247,12 @@ class WhatDecoder(nn.Module):
         #################################################################
         if self.cfg.what_attn:
             encoder_feats = encoder_states['rfts']
+            encoder_msks = encoder_states['msks']
+            att_ctx_2,l2 = self.self_attn(encoder_states['rfts'],encoder_msks,encoder_states['index'],encoder_states['len'])
+            encoder_feats = encoder_feats + att_ctx_2
             if self.cfg.attn_emb:
                 encoder_feats = torch.cat([encoder_feats, encoder_states['embs']], -1)
-            encoder_msks = encoder_states['msks']
             att_ctx, att_wei,l = self.attention( att_src, encoder_feats,encoder_msks,encoder_states['index'],encoder_states['len'])
-            
         #################################################################
         # Combine features
         #################################################################
@@ -298,7 +300,7 @@ class WhatDecoder(nn.Module):
             what_outs['attn_ctx'] = att_ctx
             what_outs['attn_wei'] = att_wei
       #  print(what_outs)
-       
+        what_outs['loss'] = l+l2
         return what_outs
 
     def init_state(self, encoder_hidden):
@@ -359,11 +361,11 @@ class WhereDecoder(nn.Module):
                 out_dim += emb_dim #512+300
             if self.cfg.where_attn == 2:
                 in_dim += out_dim #61+512+300
+         
             
                
             self.attention = Attention(config.attn_type, out_dim, in_dim,config)
-            self.loc_attention = LOC_Attention(config.attn_type, out_dim, src_dim)
-           
+            self.self_attn = SELF_Attention(config.attn_type,512)
             
             if self.cfg.where_attn_2d:
                 in_dim_2d = out_dim + tgt_dim
@@ -391,10 +393,8 @@ class WhereDecoder(nn.Module):
                 input_dim += emb_dim
         else:
             input_dim = tgt_dim + fgf_dim
-
         if self.cfg.use_bg_to_locate:
             input_dim += bgf_dim
-    
         if config.use_bn:
             self.decoder = nn.Sequential(
                 nn.Conv2d(input_dim, tgt_dim, kernel_size=3, stride=1, padding=1),
@@ -468,9 +468,11 @@ class WhereDecoder(nn.Module):
                 att_ctx = what_ctx   
             else:
                 encoder_feats = encoder_states['rfts']
+                encoder_msks = encoder_states['msks']
+                att_ctx_2,l2 = self.self_attn(encoder_states['rfts'],encoder_msks,encoder_states['index'],encoder_states['len'])
+                encoder_feats = encoder_feats + att_ctx_2
                 if self.cfg.attn_emb:
                     encoder_feats = torch.cat([encoder_feats, encoder_states['embs']], -1)  #4,18,812
-                encoder_msks = encoder_states['msks']
                 if self.cfg.where_attn == 1:
                     query = curr_fgfs
                 else:
@@ -482,25 +484,25 @@ class WhereDecoder(nn.Module):
             ctx_2d = ctx_2d.expand(bsize, tlen, att_dim, gh, gw)
             # # print('ctx_2d ', ctx_2d.size())
 
-        #     if self.cfg.where_attn > 0 and self.cfg.where_attn_2d:
-        #         attn_input = torch.cat([rnn_outs, ctx_2d], dim=2)
-        #         bsize, tlen, tdim, gh, gw = attn_input.size()
-        #         nsize = bsize * tlen
-        #         flatten_outs = attn_input.view(nsize, tdim, gh, gw)
+            if self.cfg.where_attn > 0 and self.cfg.where_attn_2d:
+                attn_input = torch.cat([rnn_outs, ctx_2d], dim=2)
+                bsize, tlen, tdim, gh, gw = attn_input.size()
+                nsize = bsize * tlen
+                flatten_outs = attn_input.view(nsize, tdim, gh, gw)
 
-        #         attn_map = self.spatial_attn(flatten_outs)
-        #         attn_map = attn_map.view(nsize, gh, gw)
-        #         attn_map = attn_map.view(nsize, gh * gw)
-        #         attn_map = F.softmax(attn_map, dim=-1)
-        #         attn_map = attn_map.view(nsize, gh, gw)
-        #         attn_map = attn_map.view(bsize, tlen, gh, gw)
-        #         attn_map = attn_map.view(bsize, tlen, 1, gh, gw)
+                attn_map = self.spatial_attn(flatten_outs)
+                attn_map = attn_map.view(nsize, gh, gw)
+                attn_map = attn_map.view(nsize, gh * gw)
+                attn_map = F.softmax(attn_map, dim=-1)
+                attn_map = attn_map.view(nsize, gh, gw)
+                attn_map = attn_map.view(bsize, tlen, gh, gw)
+                attn_map = attn_map.view(bsize, tlen, 1, gh, gw)
 
-        #         attn_rnn_outs = rnn_outs * attn_map
-        #     else:
-        #         attn_rnn_outs = rnn_outs
-            if self.cfg.loc_attn:
-                attn_rnn_outs = rnn_outs *self.loc_attention(att_ctx, rnn_outs)
+                attn_rnn_outs = rnn_outs * attn_map
+            else:
+                attn_rnn_outs = rnn_outs
+            # if self.cfg.loc_attn:
+            #     attn_rnn_outs = rnn_outs *self.loc_attention(att_ctx, rnn_outs)
         else:
             attn_rnn_outs = rnn_outs
 
@@ -513,7 +515,14 @@ class WhereDecoder(nn.Module):
         fg_2d = curr_fgfs.view(bsize, tlen, fgf_dim, 1, 1)
         fg_2d = fg_2d.expand(bsize, tlen, fgf_dim, gh, gw)
         # print('fg_2d ', fg_2d.size())
-
+        # hids = encoder_states['hids']
+        # hids = torch.stack((hids[0],hids[1],hids[2]),0)
+        # hids = torch.cat((hids[:,0,:,:],hids[:,1,:,:]), -1).contiguous()
+        # hids = torch.cat((hids[0,:,:],hids[1,:,:],hids[2,:,:]),-1).contiguous()
+        # hids_dim = hids.size()[1]
+        # hids_2d = hids.unsqueeze(1).expand(bsize,tlen,hids_dim)
+        # hids_2d = hids_2d.view(bsize,tlen,hids_dim,1,1)
+        # hids_2d = hids_2d.expand(bsize,tlen,hids_dim,gh,gw)
         #################################################################
         # Concatenate with fg features
         #################################################################
@@ -526,7 +535,7 @@ class WhereDecoder(nn.Module):
             prev_bgfs = what_states['bgfs']
             combined = torch.cat([combined, prev_bgfs], dim=2)
         # print('combined ', combined.size())
-
+        #combined = torch.cat([combined, hids_2d], dim=2)
         #################################################################
         # Classifer
         #################################################################
@@ -570,5 +579,5 @@ class WhereDecoder(nn.Module):
             where_outs['attn_ctx'] = att_ctx
             where_outs['attn_wei'] = att_wei
         
-        where_outs['loss'] = l
+        where_outs['loss'] = l+l2
         return where_outs

@@ -261,6 +261,7 @@ class TextEncoder(nn.Module):
         out_hids = torch.cat(out_hids, 2).contiguous()
         out_msks = torch.stack(out_msks, 0).contiguous()
 
+        
         # index_o = torch.cat(index_o, 0).contiguous() 
         # index_o = index_o.view(-1,4,2)
         # out_new_objs ,_= self.sgencoder(out_trip,ind_lens,objs,index_o)

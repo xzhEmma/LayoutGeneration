@@ -91,8 +91,8 @@ parser.add_argument('--n_samples', type=int, default=10)#100
 parser.add_argument('--n_epochs',  type=int, default=50)
 
 # loss weights
-parser.add_argument('--pose_loss_weight',  type=float, default=3.0)
-parser.add_argument('--expr_loss_weight',  type=float, default=3.0)
+parser.add_argument('--pose_loss_weight',  type=float, default=2.0)
+parser.add_argument('--expr_loss_weight',  type=float, default=2.0)
 parser.add_argument('--coord_loss_weight', type=float, default=2.0)
 parser.add_argument('--scale_loss_weight', type=float, default=2.0)
 parser.add_argument('--ratio_loss_weight', type=float, default=2.0)

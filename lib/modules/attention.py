@@ -112,12 +112,7 @@ class Attention(nn.Module):
         scores = self.softmax(scores.clamp(min=-1e10))
         # (batch, tgt_len, src_len) * (batch, src_len, src_dim) -> (batch, tgt_len, src_dim)
         context = torch.bmm(scores, h_s)
-        # concat -> (batch, tgt_len, src_dim+tgt_dim)
-        # combined = torch.cat((context, h_t), dim=-1)
-        # # output -> (batch, tgt_len, tgt_dim)
-        # output = self.linear_out(combined)
-        # if self.attn_type in ["general", "dot"]:
-        #     output = self.tanh(output)
+       
         l=0 
         if self.cfg.where_attn >0:
             for i in range(index.shape[0]):
@@ -129,9 +124,58 @@ class Attention(nn.Module):
                     idb = np.argmax(bt.cpu().detach().numpy())
                     l2 = scores[i,idb,ind[1]] - scores[i,idb,ind[0]]
                     l = l+abs(l1)+abs(l2)
-            return context, scores, l
+        return context, scores, l
 
-        return context, scores
+class SELF_Attention(nn.Module):
+    def __init__(self, attn_type, src_dim):
+        super(SELF_Attention, self).__init__()
+        self.attn_type = attn_type.lower()
+        
+        self.softmax = nn.Softmax(dim=-1)
+        self.fc_1 = nn.Linear(src_dim, src_dim, bias=False)
+        self.fc_2 = nn.Linear(src_dim, src_dim, bias=False)
+        self.fc_3 = nn.Linear(src_dim, 1, bias=False)
+        self.relu = nn.ReLU(inplace=False)
+    
+    def init_weights(self):
+        for name, param in self.named_parameters():
+            if 'bias' in name:
+                nn.init.constant_(param, 0.0)
+            elif 'weight' in name:
+                nn.init.xavier_uniform_(param)
+    def forward(self, h_s, m_s,index,index_lens):# 12 18 512
+        batch,len,dim = h_s.size()
+        r = torch.zeros(batch,len,len,dim)
+        m = torch.zeros(batch,len,len)
+        mask = m_s.unsqueeze(-1).expand(batch,len,dim)
+        s1 = self.fc_1(h_s)
+        s1 = torch.sigmoid(s1)
+        s1 = s1*mask
+        s2 = self.fc_2(h_s)
+        s2 = torch.sigmoid(s2) 
+        s2 = s2*mask
+        for i in range(len):
+            for j in range(len):
+                r[:,i,j,:] = s1[:,i,:]*s2[:,j,:]
+                m[:,i,j] = m_s[:,i]*m_s[:,j]
+        r = r.cuda()
+        m = m.cuda()
+        scores = self.fc_3(r.cuda()).squeeze(-1)
+        scores = scores*m
+        scores = scores - 1e11 * (1.0 - m)
+        scores = self.softmax(scores.clamp(min=-1e10))
+        l=0
+        for i in range(index.shape[0]):
+            for j,ind in enumerate(index[i,:index_lens[i],:]):
+                l1 = scores[i,ind[0],ind[1]] - scores[i,ind[1],ind[0]]
+                l2 = -0.05*torch.log10(scores[i,ind[0],ind[1]] + scores[i,ind[1],ind[0]])
+                l = l+abs(l1)+abs(l2)
+        scores = scores.unsqueeze(-1).expand(batch,len,len,dim)
+        attn_ctx = scores*r 
+        attn_ctx = torch.sum(attn_ctx,1)
+        return attn_ctx,l
+        
+
 
 
 class LOC_Attention(nn.Module):

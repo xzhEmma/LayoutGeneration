@@ -322,7 +322,7 @@ class DrawModel(nn.Module):
             inf_outs['what_att_logits']  = what_states['attn_wei']
         if self.cfg.where_attn > 0:
             inf_outs['where_att_logits'] = where_states['attn_wei']
-        inf_outs['loss'] = where_states['loss']
+        inf_outs['loss'] = where_states['loss']+what_states['loss']
         return inf_outs
 
     def collect_logits(self, inf_outs, sample_inds):
