@@ -19,6 +19,7 @@ from abstract_utils import *
 from abstract_config import get_config
 from optim import Optimizer
 
+from torch.utils.tensorboard import SummaryWriter
 
 class SupervisedTrainer(object):
     def __init__(self, db):
@@ -167,31 +168,40 @@ class SupervisedTrainer(object):
         pred_accu = comp_accu/(comp_msks + self.cfg.eps)
 
         return pred_loss, attn_loss, eos_loss, pred_accu
-        
+
     def train(self, train_db, val_db, test_db):
         ##################################################################
         ## Optimizer
         ##################################################################
         image_encoder_trainable_paras = \
             filter(lambda p: p.requires_grad, self.net.image_encoder.parameters())
-        raw_optimizer = optim.Adam([
+        raw_optimizer = optim.SGD([
                 {'params': self.net.text_encoder.embedding.parameters(), 'lr': self.cfg.finetune_lr},
                 {'params': image_encoder_trainable_paras, 'lr': self.cfg.finetune_lr},
                 {'params': self.net.text_encoder.rnn.parameters()},
                 {'params': self.net.what_decoder.parameters()}, 
                 {'params': self.net.where_decoder.parameters()}
-            ], lr=self.cfg.lr)
-        optimizer = Optimizer(raw_optimizer, max_grad_norm=self.cfg.grad_norm_clipping)
-        # scheduler = optim.lr_scheduler.ReduceLROnPlateau(optimizer.optimizer, factor=0.8, patience=3)
-        scheduler = optim.lr_scheduler.StepLR(optimizer.optimizer, step_size=3, gamma=0.8)
-        optimizer.set_scheduler(scheduler)
+             ], lr=self.cfg.lr,momentum=0.9)
 
+        # raw_optimizer = optim.Adam([
+        #         {'params': self.net.text_encoder.embedding.parameters(), 'lr': self.cfg.finetune_lr},
+        #         {'params': image_encoder_trainable_paras, 'lr': self.cfg.finetune_lr},
+        #         {'params': self.net.text_encoder.rnn.parameters()},
+        #         {'params': self.net.what_decoder.parameters()}, 
+        #         {'params': self.net.where_decoder.parameters()}
+        #     ], lr=self.cfg.lr)
+        optimizer = Optimizer(raw_optimizer, max_grad_norm=self.cfg.grad_norm_clipping)
+        scheduler = optim.lr_scheduler.ReduceLROnPlateau(optimizer.optimizer, factor=0.8, patience=3)
+        #
+        # scheduler = optim.lr_scheduler.StepLR(optimizer.optimizer, step_size=3, gamma=0.8)
+        optimizer.set_scheduler(scheduler)
+      
         ##################################################################
         ## LOG
         ##################################################################
         logz.configure_output_dir(self.cfg.model_dir)
         logz.save_config(self.cfg)
-
+        
         ##################################################################
         ## Main loop
         ##################################################################
@@ -200,10 +210,10 @@ class SupervisedTrainer(object):
             ##################################################################
             ## Training  
             ##################################################################
-            torch.cuda.empty_cache()
-            train_pred_loss, train_attn_loss, train_eos_loss, train_accu = \
-                self.train_epoch(train_db, optimizer, epoch)
-                
+            # torch.cuda.empty_cache()
+            # train_pred_loss, train_attn_loss, train_eos_loss, train_accu = \
+            #     self.train_epoch(train_db, optimizer, epoch)
+   
             ##################################################################
             ## Validation
             ##################################################################
@@ -226,14 +236,14 @@ class SupervisedTrainer(object):
             logz.log_tabular("Time", time() - start)
             logz.log_tabular("Iteration", epoch)
 
-            logz.log_tabular("TrainAverageError", np.mean(train_pred_loss))
-            logz.log_tabular("TrainStdError", np.std(train_pred_loss))
-            logz.log_tabular("TrainMaxError", np.max(train_pred_loss))
-            logz.log_tabular("TrainMinError", np.min(train_pred_loss))
-            logz.log_tabular("TrainAverageAccu", np.mean(train_accu))
-            logz.log_tabular("TrainStdAccu", np.std(train_accu))
-            logz.log_tabular("TrainMaxAccu", np.max(train_accu))
-            logz.log_tabular("TrainMinAccu", np.min(train_accu))
+            # logz.log_tabular("TrainAverageError", np.mean(train_pred_loss))
+            # logz.log_tabular("TrainStdError", np.std(train_pred_loss))
+            # logz.log_tabular("TrainMaxError", np.max(train_pred_loss))
+            # logz.log_tabular("TrainMinError", np.min(train_pred_loss))
+            # logz.log_tabular("TrainAverageAccu", np.mean(train_accu))
+            # logz.log_tabular("TrainStdAccu", np.std(train_accu))
+            # logz.log_tabular("TrainMaxAccu", np.max(train_accu))
+            # logz.log_tabular("TrainMinAccu", np.min(train_accu))
             
             logz.log_tabular("ValAverageError", np.mean(val_loss))
             logz.log_tabular("ValStdError", np.std(val_loss))
@@ -288,9 +298,17 @@ class SupervisedTrainer(object):
             logz.log_tabular("ValUnigramFlip",  np.mean(val_infos.flip()))
             logz.log_tabular("ValUnigramSim",   np.mean(val_infos.unigram_coord()))
             logz.log_tabular("ValBigramSim",    val_infos.mean_bigram_coord())
+            logz.log_tabular("ValBigramSiml",    val_infos.mean_bigram_coordsim())
 
             logz.dump_tabular()
 
+            writer = SummaryWriter('./runs')
+            #writer.add_scalar("TrainAverageError", np.mean(train_pred_loss), epoch)
+            writer.add_scalar("AverageError", np.mean(val_loss), epoch)
+            writer.add_scalar("Uni_Sim",   np.mean(val_infos.unigram_coord()),epoch)
+            writer.add_scalar("Bi_gramSim",    val_infos.mean_bigram_coord(),epoch)
+            writer.add_scalar("Bi_gramSiml",    val_infos.mean_bigram_coordsim(),epoch)
+            writer.close()
             ##################################################################
             ## Checkpoint
             ##################################################################
@@ -305,7 +323,7 @@ class SupervisedTrainer(object):
             num_workers=self.cfg.num_workers)
 
         train_pred_loss, train_attn_loss, train_eos_loss, train_accu = [], [], [], []
-        
+
         for cnt, batched in enumerate(train_loader):
             ##################################################################
             ## Batched data
@@ -353,8 +371,6 @@ class SupervisedTrainer(object):
                 eos_loss_np = eos_loss.cpu().data.item()
             train_eos_loss.append(eos_loss_np)
             train_accu.append(pred_accu.cpu().data.numpy())
-
-
             ##################################################################
             ## Print info
             ##################################################################

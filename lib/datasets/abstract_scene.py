@@ -138,13 +138,7 @@ class abstract_scene(Dataset):
             word_lens.append(cur_len)  
 
             graph = sng_parser.parse(shuffled_sents[k])
-            entities = graph['entities']
-            # for i in entities:
-            #     obj = i["lemma_head"].lower()
-            #     if obj not in obj_ls:
-            #         obj_ls.append(obj)#['it', 'mike', "apple tree"]
-            #         obj_inds.append(self.obj2index(obj))
-            
+            entities = graph['entities']   
             rels = graph['relations']
             if rels == []:
                 continue
@@ -159,33 +153,14 @@ class abstract_scene(Dataset):
                 if sub_ind==[18] or obj_ind==[18]:
                     print(sub,obj,sub_ind,obj_ind)
                     print('ey')
-            #     trip = self.obj2index(sub)+[self.lang_vocab.rel2index[rel]]+self.obj2index(obj)
-            # triple.append(trip)
+     
                 if len(sub_ind)==0 or len(obj_ind)==0:
                     pass
                 else:
                     for i in sub_ind:
                         for j in obj_ind:
                             if [i,j] not in triple:
-                                triple.append([i,j])
-                # elif len(sub_ind)==2:
-                #     if len(obj_ind)==1:
-                #         triple.append([sub_ind[0]]+obj_ind)
-                #         triple.append([sub_ind[1]]+obj_ind)
-                #     else:
-                #         triple.append([sub_ind[0]]+[obj_ind[0]])
-                #         triple.append([sub_ind[0]]+[obj_ind[1]])
-                #         triple.append([sub_ind[1]]+[obj_ind[0]])
-                #         triple.append([sub_ind[1]]+[obj_ind[1]])
-                # elif len(sub_ind)==1:
-                #     if len(obj_ind)==2:
-                #         triple.append(sub_ind+[obj_ind[0]])
-                #         triple.append(sub_ind+[obj_ind[1]])
-                #     else:
-                #         triple.append(sub_ind+obj_ind)    
-                # else:
-                #     pass
-                
+                                triple.append([i,j])          
 
         entry['word_inds'] = np.stack(word_inds, 0).astype(np.int32)
         entry['word_lens'] = np.stack(word_lens, 0).astype(np.int32)

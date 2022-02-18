@@ -46,45 +46,45 @@ class BasicBlock(nn.Module):
 
         return out
 
-class SGEncoder(nn.Module):
-    def __init__(self, embedding_dim=600,
-               gconv_dim=600, gconv_hidden_dim=512,
-               gconv_pooling='avg', gconv_num_layers=5,  
-               mlp_normalization='none'):
-        super(SGEncoder, self).__init__()
+# class SGEncoder(nn.Module):
+#     def __init__(self, embedding_dim=600,
+#                gconv_dim=600, gconv_hidden_dim=512,
+#                gconv_pooling='avg', gconv_num_layers=5,  
+#                mlp_normalization='none'):
+#         super(SGEncoder, self).__init__()
 
-        if gconv_num_layers == 0:
-            self.gconv = nn.Linear(embedding_dim, gconv_dim)
-        elif gconv_num_layers > 0:
-            gconv_kwargs = {
-                'input_dim': embedding_dim,
-                'output_dim': gconv_dim,
-                'hidden_dim': gconv_hidden_dim,
-                'pooling': gconv_pooling,
-                'mlp_normalization': mlp_normalization,
-            }
-            self.gconv = GraphTripleConv(**gconv_kwargs)
+#         if gconv_num_layers == 0:
+#             self.gconv = nn.Linear(embedding_dim, gconv_dim)
+#         elif gconv_num_layers > 0:
+#             gconv_kwargs = {
+#                 'input_dim': embedding_dim,
+#                 'output_dim': gconv_dim,
+#                 'hidden_dim': gconv_hidden_dim,
+#                 'pooling': gconv_pooling,
+#                 'mlp_normalization': mlp_normalization,
+#             }
+#             self.gconv = GraphTripleConv(**gconv_kwargs)
 
-        self.gconv_net = None
-        if gconv_num_layers > 1:
-            gconv_kwargs = {
-                'input_dim': gconv_dim,
-                'hidden_dim': gconv_hidden_dim,
-                'pooling': gconv_pooling,
-                'num_layers': gconv_num_layers - 1,
-                'mlp_normalization': mlp_normalization,
-            }
-            self.gconv_net = GraphTripleConvNet(**gconv_kwargs)
+#         self.gconv_net = None
+#         if gconv_num_layers > 1:
+#             gconv_kwargs = {
+#                 'input_dim': gconv_dim,
+#                 'hidden_dim': gconv_hidden_dim,
+#                 'pooling': gconv_pooling,
+#                 'num_layers': gconv_num_layers - 1,
+#                 'mlp_normalization': mlp_normalization,
+#             }
+#             self.gconv_net = GraphTripleConvNet(**gconv_kwargs)
 
-    def forward(self, trip,rel_lens,objs,index ):
-        if isinstance(self.gconv, nn.Linear):
-            obj_vecs = self.gconv(objs)
-        else:
-            obj_vecs = self.gconv(trip,rel_lens,index)
-        if self.gconv_net is not None:
-            obj_vecs = self.gconv_net(trip,rel_lens,index)
+#     def forward(self, trip,rel_lens,objs,index ):
+#         if isinstance(self.gconv, nn.Linear):
+#             obj_vecs = self.gconv(objs)
+#         else:
+#             obj_vecs = self.gconv(trip,rel_lens,index)
+#         if self.gconv_net is not None:
+#             obj_vecs = self.gconv_net(trip,rel_lens,index)
         
-        return obj_vecs
+#         return obj_vecs
 
 
 class TextEncoder(nn.Module):
@@ -95,7 +95,6 @@ class TextEncoder(nn.Module):
         self.nfeat = 600
         self.nhid = 600
         self.output_dim = 1024
-        self.sgencoder = SGEncoder()
         self.embedding = nn.Embedding(self.cfg.input_vocab_size, self.cfg.n_embed)#2538 300
         if self.cfg.emb_dropout_p > 0:
             self.embedding_dropout = nn.Dropout(p=self.cfg.emb_dropout_p)
@@ -113,10 +112,10 @@ class TextEncoder(nn.Module):
             bidirectional=self.cfg.bidirectional, 
             dropout=self.cfg.rnn_dropout_p)
 
-        self.rnn_obj = self.rnn_cell(self.cfg.n_embed*2, self.cfg.n_src_hidden, 
-            self.cfg.n_rnn_layers, batch_first=True, 
-            bidirectional=self.cfg.bidirectional, 
-            dropout=self.cfg.rnn_dropout_p)
+        # self.rnn_obj = self.rnn_cell(self.cfg.n_embed*2, self.cfg.n_src_hidden, 
+        #     self.cfg.n_rnn_layers, batch_first=True, 
+        #     bidirectional=self.cfg.bidirectional, 
+        #     dropout=self.cfg.rnn_dropout_p)
 
         for name, param in self.rnn.named_parameters():
             if 'bias' in name:
@@ -158,8 +157,8 @@ class TextEncoder(nn.Module):
         """  
         bsize, n_seg, slen = input_inds.size() #4,3个句子，句子最大长度
         out_embs, out_rfts, out_msks = [], [], []
-        out_hids, out_cels ,index_o= [], [],[]
-        out_trip = []
+        out_hids, out_cels = [], []
+    
         factor = 2 if self.cfg.bidirectional else 1
         hsize  = factor * self.cfg.n_src_hidden
         pad_rft = torch.zeros(1, 1, hsize)
@@ -170,7 +169,7 @@ class TextEncoder(nn.Module):
         
         for i in range(bsize):
             inst_rfts, inst_embs, inst_hids = [], [], []
-            word_inds,trip_emb ,curr_index_o= [],[],[]
+            word_inds= []
             for j in range(n_seg):
                 # every segment has its own hidden states
                 # curr_hidden = self.init_hidden(1)
@@ -223,51 +222,10 @@ class TextEncoder(nn.Module):
             else:
                 hs = torch.stack([inst_hids[0], inst_hids[1], inst_hids[2]], 0)
                 out_hids.append(hs)
-
-           
-            # o = input_inds[i,0].cpu().numpy().tolist()+input_inds[i,1].cpu().numpy().tolist()+input_inds[i,2].cpu().numpy().tolist()
-            # sub = index[i,:ind_lens[i],:2].cpu().numpy().tolist()
-            # obj = index[i,:ind_lens[i],2:].cpu().numpy().tolist()
-            # o = objs[i,:objs_n[i]].cpu().numpy().tolist()
-           
-            # sub_ind = [o.index(i[0]) for i in sub] 
-            # obj_ind = [o.index(i[0]) for i in obj]
-            # ind_o = torch.Tensor(sub_ind + obj_ind).view(2,-1).t()
-            # assert ind_o.size(0)<=4
-            # if ind_o.size(0)<4:
-            #     ind_o = torch.cat((ind_o,torch.zeros(4-ind_o.size(0),2)),0)
-            # index_o.append(ind_o)
-
-            # trip_vec = self.embedding(index[i])
-            # if self.cfg.emb_dropout_p > 0:
-            #     trip_vec = self.embedding_dropout(trip_vec)
-            # trip_emb.append(trip_vec)
-            # for k in range(ind_lens[i]):
-            #     curr_index = index[i,k]
-            #     curr_index = curr_index.view(1, 5)
-            #     trip_vec = self.embedding(curr_index)
-            #     if self.cfg.emb_dropout_p > 0:
-            #         trip_vec = self.embedding_dropout(trip_vec)
-            #     trip_emb.append(trip_vec)
-            #trip_embs = torch.cat(trip_emb, 0)
-            # trip_embs = torch.cat([trip_embs, pad_emb.expand(12-int(ind_lens[i]),5, self.cfg.n_embed)], 0)
-            # trip_embs = torch.cat((trip_embs[:,0,:],trip_embs[:,1,:],trip_embs[:,2,:],trip_embs[:,3,:],trip_embs[:,4,:]),1)
-            # trip_embs = trip_embs.unsqueeze(0)
-            # out_trip.append(trip_embs)
-
-       # out_trip = torch.cat(out_trip, 0).contiguous() 
         out_rfts = torch.cat(out_rfts, 0).contiguous()        
         out_embs = torch.cat(out_embs, 0).contiguous()
         out_hids = torch.cat(out_hids, 2).contiguous()
         out_msks = torch.stack(out_msks, 0).contiguous()
-
-        # index_o = torch.cat(index_o, 0).contiguous() 
-        # index_o = index_o.view(-1,4,2)
-        # out_new_objs ,_= self.sgencoder(out_trip,ind_lens,objs,index_o)
-
-        # objs_emb = self.embedding(objs)
-        # objs_embs = torch.cat((objs_emb[:,:,0,:],objs_emb[:,:,1,:]),2)
-        # new_objs = torch.cat((objs_embs,out_new_objs),2)
        
         out = {}
         out['len'] = ind_lens
@@ -338,6 +296,47 @@ class ImageEncoder(nn.Module):
         x = x.view(bsize, slen, fsize, gh, gw)
         return x 
 
+
+# class ImageEncoder(nn.Module):
+#     def __init__(self,config):
+#         super(ImageEncoder, self).__init__()
+#         self.cfg = config
+#         densnet = models.densenet121(pretrained=True)
+#         self.feature = densnet.features
+#         self.classifier = nn.Sequential(*list(densnet.classifier.children())[:-1]) 
+#         self.layer1 = nn.Sequential(
+#                 self.feature.conv0,
+#                 self.feature.norm0,
+#                 self.feature.relu0,
+#                 self.feature.pool0)
+#         self.layer2 = self.feature.denseblock1
+#         self.layer3 = self.feature.transition1
+#         self.layer4 = self.feature.denseblock2
+#         self.layer5 = self.feature.transition2
+#         self.layer6 = self.feature.denseblock3
+#         self.upsample = nn.Upsample(size=(self.cfg.grid_size[1], self.cfg.grid_size[0]), mode='bilinear', align_corners=True)
+
+#         pretrained_dict = densnet.state_dict()
+#         model_dict = self.classifier.state_dict()
+#         pretrained_dict = {k: v for k, v in pretrained_dict.items() if k in model_dict}
+#         model_dict.update(pretrained_dict)
+#         self.classifier.load_state_dict(model_dict)
+#     def forward(self, x):
+#         if self.cfg.finetune_lr == 0:
+#              self.eval()
+#         bsize, slen, fsize, height, width = x.size()
+#         x = x.view(bsize * slen, fsize, height, width)
+#         x= self.layer1(x)
+#         x = self.layer2(x)
+#         x = self.layer3(x)
+#         x = self.layer4(x)
+#         x = self.layer5(x)
+#         output = self.layer6(x)
+#         output = self.upsample (output)
+#         nsize, fsize, gh, gw = output.size()
+#         assert(nsize == bsize * slen)
+#         output = output.view(bsize, slen, fsize, gh, gw)
+#         return output
 
 
 

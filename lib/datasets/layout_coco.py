@@ -11,6 +11,8 @@ import matplotlib.pyplot as plt
 from nltk.tokenize import word_tokenize
 from collections import OrderedDict
 
+from SceneGraphParser import sng_parser
+
 from layout_config import get_config
 from layout_utils import *
 
@@ -97,6 +99,40 @@ class layout_coco(Dataset):
             self.cfg.max_input_length, self.cfg.PAD_idx, None, self.cfg.EOS_idx, 1.0)
         entry['word_inds'] = word_inds.astype(np.int32)
         entry['word_lens'] = np.sum(word_msks).astype(np.int32)
+
+        graph = sng_parser.parse(sentence)
+        entities = graph['entities']   
+        rels = graph['relations']
+        triple = []
+        for i,r in enumerate(rels):
+                sub = entities[r['subject']]['head'].lower()
+                obj = entities[r['object']]['head'].lower()
+                rel = r['lemma_relation']
+            
+                sub_ind = [tokens.index(m) for m in sub.split(' ') if m in tokens[:7]]  
+                obj_ind = [tokens.index(m) for m in obj.split(' ') if m in tokens[:7]]
+     
+                if len(sub_ind)==0 or len(obj_ind)==0:
+                    pass
+                else:
+                    for i in sub_ind:
+                        for j in obj_ind:
+                            if [i,j] not in triple:
+                                triple.append([i,j])
+        if triple == []:
+            index = np.zeros((5,2))
+            ind_lens = 0
+        else:   
+            index = np.stack(triple, 0).astype(np.int32)
+            ind_lens = index.shape[0]
+            if index.shape[0]<=5 :
+                index = np.vstack((index,np.zeros((5-ind_lens,2))))
+            else:
+                index = index[:5,:]
+                ind_lens = index.shape[0]
+
+        entry['ind_lens'] =  ind_lens
+        entry['index'] = index.astype(np.int32)
 
         # Output inds
         if len(scene['clses']) > 0:

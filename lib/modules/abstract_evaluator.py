@@ -128,7 +128,7 @@ class scene_graph(object):
                     v = diff / (l+self.cfg.eps)
                     t = 0.5 * (math.atan2(v[1], v[0]) + math.pi)/math.pi
                     # obj idx 1, obj idx 2, obj coord 1, obj coord 2, offset xy, offset polar
-                    bivec = np.array([src_id, tgt_id, src_xy[0], src_xy[1], tgt_xy[0], tgt_xy[1], x, y, l, t])
+                    bivec = np.array([src_id, tgt_id, src_xy[0], src_xy[1], tgt_xy[0], tgt_xy[1],src_flip_or_not ,tgt_flip_or_not, x, y, l, t])
                     bigrams.append(bivec.astype(np.float32))
             
             #TODO should sort in some way
@@ -189,6 +189,14 @@ class eval_info(object):
         mean_coords = np.sum(coords * mask)/(np.sum(mask) + self.cfg.eps)
         return mean_coords
 
+    def mean_bigram_coordsim(self):
+        recall = self.bigram_R()
+        mask = (recall >= 0.0).astype(np.float32)
+        coordsim = self.bigram_coordsim()
+        mean_coordsim = np.sum(coordsim * mask)/(np.sum(mask) + self.cfg.eps)
+        return mean_coordsim
+    
+
     ################################################################
     # Property
     ################################################################
@@ -221,6 +229,8 @@ class eval_info(object):
     
     def bigram_coord(self):
         return self.scores[:, 9]
+    def bigram_coordsim(self):
+        return self.scores[:, 10]
     
     
 class evaluator(object):
@@ -237,7 +247,7 @@ class evaluator(object):
         assert(len(gt_graph.unigrams) > 0)
 
         if len(pred_graph.unigrams) == 0:
-            scores = np.zeros((10, ), dtype=np.float32)
+            scores = np.zeros((11, ), dtype=np.float32)
             # # indicate this entry is not used for precision calculation
             # scores[0] = -1.0; scores[2] = -1.0 
             return scores
@@ -248,11 +258,11 @@ class evaluator(object):
         # P, R, coord
         if len(gt_graph.bigrams) == 0:
             # indicate this entry is not used for recall calculation
-            bigram_comps = np.array([0.0, -1.0, 0.0], dtype=np.float32)
+            bigram_comps = np.array([0.0, -1.0, 0.0, 0.0], dtype=np.float32)
         else:
             bigram_comps = self.bigram_reward(pred_graph.bigrams, gt_graph.bigrams)
-
-        scores = unigram_comps[:2].tolist() + bigram_comps[:2].tolist() + unigram_comps[2:].tolist() + [bigram_comps[-1]]
+        
+        scores = unigram_comps[:2].tolist() + bigram_comps[:2].tolist() + unigram_comps[2:].tolist() + [bigram_comps[-2]]+[bigram_comps[-1]]
         scores = np.array(scores, dtype=np.float32)
         return scores
     
@@ -292,7 +302,7 @@ class evaluator(object):
         return np.array([precision, recall, pose_s, expr_s, scal_s, flip_s, coor_s], dtype=np.float32)
     
     def bigram_reward(self, pred_bigrams, gt_bigrams):
-        self.common_pred_bigrams, self.common_gt_bigrams, self.bigram_gaussians = \
+        self.common_pred_bigrams, self.common_gt_bigrams, self.bigram_gaussians,self.fs = \
             self.find_common_bigrams(pred_bigrams, gt_bigrams)
         n_common = len(self.common_pred_bigrams)
         if n_common == 0:
@@ -304,7 +314,9 @@ class evaluator(object):
         precision = float(n_common)/n_pred
         recall    = float(n_common)/n_gt
         coor_s = np.sum(self.bigram_gaussians)/float(n_common)
-        return np.array([precision, recall, coor_s], dtype=np.float32)
+        fss = np.sum(self.fs)/float(n_common)
+        
+        return np.array([precision, recall, coor_s,fss], dtype=np.float32)
 
     def find_common_unigrams(self, pred_unigrams, gt_unigrams):
         common_pred_unigrams, common_gt_unigrams, unigram_gaussians = [], [], []
@@ -345,7 +357,7 @@ class evaluator(object):
         return common_pred_unigrams, common_gt_unigrams, unigram_gaussians
 
     def find_common_bigrams(self, pred_bigrams, gt_bigrams):
-        common_pred_bigrams, common_gt_bigrams, distances = [], [], []
+        common_pred_bigrams, common_gt_bigrams, distances ,fs = [], [], [],[]
         n_gt = len(gt_bigrams)
         assert(n_gt > 0)
         msk_gt = np.zeros((n_gt, ))
@@ -363,12 +375,15 @@ class evaluator(object):
                 if gt_entry is None:
                     gt_entry = candidate
                     gaussian = self.bigram_gaussian(pred_entry, candidate)
+                    f = self.bigram_flip(pred_entry, candidate)
                     gt_idx = j
                     continue
                 
                 curr_gaussian = self.bigram_gaussian(pred_entry, candidate)
                 if curr_gaussian > gaussian:
                     gaussian = curr_gaussian
+                    f = self.bigram_flip(pred_entry, candidate)
+                    assert(f<=1.0)
                     gt_entry = candidate
                     gt_idx = j
 
@@ -376,13 +391,14 @@ class evaluator(object):
                 common_pred_bigrams.append(pred_entry)
                 common_gt_bigrams.append(gt_entry)
                 distances.append(gaussian)
+                fs.append(f*gaussian)
                 msk_gt[gt_idx] = 1
 
         if len(common_pred_bigrams) > 0:
             common_pred_bigrams = np.stack(common_pred_bigrams, 0)
             common_gt_bigrams = np.stack(common_gt_bigrams, 0)
 
-        return common_pred_bigrams, common_gt_bigrams, distances
+        return common_pred_bigrams, common_gt_bigrams, distances,fs
     
     def unigram_gaussian(self, A, B):
         return gaussian2d(A[-2:], B[-2:], self.cfg.sigmas[:2])
@@ -401,5 +417,16 @@ class evaluator(object):
             v_t = np.minimum(max_t - min_t, abs(min_t + 1.0 - max_t))/float(sigmas[1])
 
             d = math.exp(-0.5 * (v_l * v_l + v_t * v_t))
-            return d
+            return d 
+
+    def bigram_flip(self, pred, gt):
+        
+        sigmas = self.cfg.sigmas[2:]
+
+        pred_A = pred[6]; pred_B = pred[7]
+        gt_A = gt[6]; gt_B = gt[7]
+        d = math.exp(-0.05*abs((abs(pred_A- gt_A)-abs(pred_B- gt_B)))/float(sigmas[1]))
+        assert(d<=1.0)
+        return d 
+
     

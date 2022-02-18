@@ -7,7 +7,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 from modules.conv_rnn import ConvGRU, ConvLSTM
-from modules.attention import Attention
+from modules.attention import Attention, Attention_where
 from abstract_utils import Flatten, indices2onehots
 from modules.DSGA import GCN
 
@@ -28,7 +28,7 @@ class WhatDecoder(nn.Module):
         emb_dim = config.n_embed#300
         bgf_dim = config.n_conv_hidden
         fgf_dim = config.output_cls_size #61
-        sg_dim = config.obj_embed #1024
+   
         #################################################################
         # Conv RNN
         #################################################################
@@ -76,7 +76,8 @@ class WhatDecoder(nn.Module):
                 in_dim += bgf_dim 
             if self.cfg.use_fg_to_pred == 2:
                 in_dim += fgf_dim 
-            self.attention = Attention(config.attn_type, out_dim, in_dim,config)
+            self.attention = Attention(config.attn_type, out_dim, in_dim)
+            #self.self_attn = SELF_Attention(config.attn_type,512)
         #################################################################
         # Segment pooling
         #################################################################
@@ -117,7 +118,7 @@ class WhatDecoder(nn.Module):
                 nn.init.xavier_uniform_(param)
 
     def segment_forward(self, prev_feats, prev_hids):
-       # print('segment_forward',prev_hids.size())
+       
         curr_outs, curr_hids, _ = self.rnn(prev_feats, prev_hids)
         
         if self.cfg.attn_2d:
@@ -166,7 +167,6 @@ class WhatDecoder(nn.Module):
             - **msks** (bsize, slen)
             - **hids** [list of][tuple of](layer, bsize, src_dim)
 
-            - **sg**   (bsize,obj_num,emb_dim)
             
         Outputs: 
             what_states containing
@@ -226,7 +226,6 @@ class WhatDecoder(nn.Module):
 
         # If use fgf as input for the conv rnn
         prev_feats = prev_bgfs
-       # print('prev_bgfs',prev_bgfs.size())#[4, 1, 61]
         if self.cfg.use_fg_to_pred == 1:
             prev_feats = torch.cat([prev_feats, prev_fgfs], 2)
        # print('prev_feats ', prev_feats.size())
@@ -248,11 +247,12 @@ class WhatDecoder(nn.Module):
         #################################################################
         if self.cfg.what_attn:
             encoder_feats = encoder_states['rfts']
-            if self.cfg.attn_emb:
-                encoder_feats = torch.cat([encoder_feats, encoder_states['embs']], -1)
             encoder_msks = encoder_states['msks']
-            att_ctx, att_wei,l = self.attention( att_src, encoder_feats,encoder_msks,encoder_states['index'],encoder_states['len'])
-            
+            #att_ctx_2,l2 = self.self_attn(encoder_states['rfts'],encoder_msks,encoder_states['index'],encoder_states['len'])
+            #encoder_feats = encoder_feats + att_ctx_2
+            if self.cfg.attn_emb: 
+                encoder_feats = torch.cat([encoder_feats, encoder_states['embs']], -1)
+            att_ctx, att_wei= self.attention( att_src, encoder_feats,encoder_msks)
         #################################################################
         # Combine features
         #################################################################
@@ -299,12 +299,10 @@ class WhatDecoder(nn.Module):
         if self.cfg.what_attn:
             what_outs['attn_ctx'] = att_ctx
             what_outs['attn_wei'] = att_wei
-      #  print(what_outs)
-       
         return what_outs
 
     def init_state(self, encoder_hidden):
-        if isinstance(encoder_hidden, tuple):
+        if isinstance(encoder_hidden, tuple): 
             # LSTM
             encoder_hidden = tuple([self._cat_directions(h) for h in encoder_hidden])
         else:
@@ -350,7 +348,7 @@ class WhereDecoder(nn.Module):
         emb_dim = config.n_embed
         bgf_dim = config.n_conv_hidden
         fgf_dim = config.output_cls_size 
-        sg_dim = config.obj_embed
+        
         #################################################################
         # Attention
         #################################################################
@@ -361,12 +359,9 @@ class WhereDecoder(nn.Module):
                 out_dim += emb_dim #512+300
             if self.cfg.where_attn == 2:
                 in_dim += out_dim #61+512+300
-            # if self.cfg.sg:
-            #     in_dim +=sg_dim
-               
-            self.attention = Attention(config.attn_type, out_dim, in_dim,config)
-           
-            
+                  
+            self.attention = Attention_where(config.attn_type, out_dim, in_dim,config)
+   
             if self.cfg.where_attn_2d:
                 in_dim_2d = out_dim + tgt_dim
                 if self.cfg.use_bn:
@@ -393,11 +388,8 @@ class WhereDecoder(nn.Module):
                 input_dim += emb_dim
         else:
             input_dim = tgt_dim + fgf_dim
-
         if self.cfg.use_bg_to_locate:
             input_dim += bgf_dim
-        # print('input_dim',  input_dim)
-
         if config.use_bn:
             self.decoder = nn.Sequential(
                 nn.Conv2d(input_dim, tgt_dim, kernel_size=3, stride=1, padding=1),
@@ -466,25 +458,24 @@ class WhereDecoder(nn.Module):
         #################################################################
         
         if self.cfg.what_attn:
-            what_ctx = what_states['attn_ctx']#4,10,1836
+            what_ctx = what_states['attn_ctx']#4,10,812
             if self.cfg.where_attn == 0:
                 att_ctx = what_ctx   
             else:
                 encoder_feats = encoder_states['rfts']
+                encoder_msks = encoder_states['msks']
                 if self.cfg.attn_emb:
                     encoder_feats = torch.cat([encoder_feats, encoder_states['embs']], -1)  #4,18,812
-                encoder_msks = encoder_states['msks']
                 if self.cfg.where_attn == 1:
                     query = curr_fgfs
                 else:
-                    query = torch.cat([curr_fgfs, what_ctx], -1)#4,10,1897   
-                att_ctx, att_wei,l = self.attention( query, encoder_feats,encoder_msks,encoder_states['index'],encoder_states['len'])
-            
+                    query = torch.cat([curr_fgfs, what_ctx], -1)  
+                att_ctx, att_wei,l = self.attention( query, encoder_feats,encoder_msks,encoder_states['index'],encoder_states['len'])#att_ctx = 12 10 812
             bsize, tlen, att_dim = att_ctx.size()
             # Replicate  
             ctx_2d = att_ctx.view(bsize, tlen, att_dim, 1, 1)
             ctx_2d = ctx_2d.expand(bsize, tlen, att_dim, gh, gw)
-            # print('ctx_2d ', ctx_2d.size())
+            # # print('ctx_2d ', ctx_2d.size())
 
             if self.cfg.where_attn > 0 and self.cfg.where_attn_2d:
                 attn_input = torch.cat([rnn_outs, ctx_2d], dim=2)
@@ -500,33 +491,17 @@ class WhereDecoder(nn.Module):
                 attn_map = attn_map.view(bsize, tlen, gh, gw)
                 attn_map = attn_map.view(bsize, tlen, 1, gh, gw)
 
-                # attn_map_np = attn_map.cpu().data.numpy().squeeze()
-                # attn_map_np = attn_map_np.reshape(gh, gw)
-                # heatmap = cv2.resize(attn_map_np, (500, 400)) 
-                # heatmap = (255 * heatmap).astype(np.uint8)
-                # heatmap = cv2.equalizeHist(heatmap)
-                # heatmap = np.repeat(np.expand_dims(heatmap, axis=-1), 3, axis=-1)
-                # cv2.imwrite('heat_map.png', heatmap)
-
-                # attn_map_np = attn_map.cpu().data.numpy().squeeze()
-                # attn_map_np = attn_map_np.flatten()
-                # lin_inds = np.lexsort((-attn_map_np, )) #np.argsort(attn_map_np)
-                # heatmap = np.zeros((gh, gw, 3), dtype=np.uint8)
-                # for i in range(3):
-                #     idx = lin_inds[i]
-                #     ih = idx // gw
-                #     iw = idx % gw
-                #     heatmap[ih, iw, i] = 255
-                # heatmap = cv2.resize(heatmap, (500, 400), interpolation=cv2.INTER_NEAREST) 
-                # cv2.imwrite('heat_map.png', heatmap)
-
-                # print('attn_map', attn_map.size())
-
                 attn_rnn_outs = rnn_outs * attn_map
             else:
                 attn_rnn_outs = rnn_outs
+            # if self.cfg.loc_attn:
+            #     attn_rnn_outs = rnn_outs *self.loc_attention(att_ctx, rnn_outs)
+            # if self.cfg.loc_attn:
+            #     attn_rnn_outs,_ = self.attn_flow(rnn_outs,encoder_states['rfts'], encoder_msks)
         else:
             attn_rnn_outs = rnn_outs
+
+          
 
         #################################################################
         # Expand fg features
@@ -535,7 +510,14 @@ class WhereDecoder(nn.Module):
         fg_2d = curr_fgfs.view(bsize, tlen, fgf_dim, 1, 1)
         fg_2d = fg_2d.expand(bsize, tlen, fgf_dim, gh, gw)
         # print('fg_2d ', fg_2d.size())
-
+        # hids = encoder_states['hids']
+        # hids = torch.stack((hids[0],hids[1],hids[2]),0)
+        # hids = torch.cat((hids[:,0,:,:],hids[:,1,:,:]), -1).contiguous()
+        # hids = torch.cat((hids[0,:,:],hids[1,:,:],hids[2,:,:]),-1).contiguous()
+        # hids_dim = hids.size()[1]
+        # hids_2d = hids.unsqueeze(1).expand(bsize,tlen,hids_dim)
+        # hids_2d = hids_2d.view(bsize,tlen,hids_dim,1,1)
+        # hids_2d = hids_2d.expand(bsize,tlen,hids_dim,gh,gw)
         #################################################################
         # Concatenate with fg features
         #################################################################
@@ -548,7 +530,7 @@ class WhereDecoder(nn.Module):
             prev_bgfs = what_states['bgfs']
             combined = torch.cat([combined, prev_bgfs], dim=2)
         # print('combined ', combined.size())
-
+        #combined = torch.cat([combined, hids_2d], dim=2)
         #################################################################
         # Classifer
         #################################################################

@@ -1,0 +1,3203 @@
+{
+    "hiolding": [
+        "right of",
+        "left of",
+        "above",
+        "surrounding"
+    ],
+    "counter": [
+        "inside"
+    ],
+    "tied in": [
+        "right of",
+        "left of",
+        "surrounding",
+        "inside"
+    ],
+    "running down": [
+        "right of",
+        "left of"
+    ],
+    "pf": [
+        "surrounding"
+    ],
+    "blessing": [
+        "surrounding"
+    ],
+    "portraying": [
+        "right of",
+        "left of",
+        "surrounding",
+        "inside"
+    ],
+    "combing": [
+        "inside"
+    ],
+    "pealing": [
+        "inside"
+    ],
+    "peel": [
+        "above"
+    ],
+    "outside over": [
+        "above"
+    ],
+    "got into": [
+        "inside"
+    ],
+    "get to": [
+        "right of",
+        "left of",
+        "surrounding"
+    ],
+    "unwrapped": [
+        "right of"
+    ],
+    "tickling": [
+        "right of"
+    ],
+    "living in": [
+        "surrounding"
+    ],
+    "departs": [
+        "surrounding"
+    ],
+    "near": [
+        "surrounding"
+    ],
+    "goes down": [
+        "below"
+    ],
+    "bound": [
+        "surrounding"
+    ],
+    "designs": [
+        "surrounding"
+    ],
+    "smell": [
+        "surrounding"
+    ],
+    "talk": [
+        "right of",
+        "left of"
+    ],
+    "beside on": [
+        "surrounding"
+    ],
+    "pulled down": [
+        "below"
+    ],
+    "signing": [
+        "above"
+    ],
+    "waering": [
+        "below"
+    ],
+    "gathers": [
+        "surrounding"
+    ],
+    "gaining": [
+        "surrounding"
+    ],
+    "shoring": [
+        "below"
+    ],
+    "sided": [
+        "above"
+    ],
+    "grind": [
+        "above"
+    ],
+    "around in": [
+        "above",
+        "below",
+        "right of",
+        "left of"
+    ],
+    "holds on": [
+        "above"
+    ],
+    "sheers": [
+        "above"
+    ],
+    "detour": [
+        "surrounding"
+    ],
+    "dropping": [
+        "below"
+    ],
+    "close": [
+        "right of",
+        "left of"
+    ],
+    "extended": [
+        "surrounding"
+    ],
+    "turned": [
+        "right of",
+        "left of"
+    ],
+    "returned": [
+        "above"
+    ],
+    "breaks": [
+        "surrounding"
+    ],
+    "cold in": [
+        "right of",
+        "left of",
+        "surrounding"
+    ],
+    "galling": [
+        "above"
+    ],
+    "leaning": [
+        "surrounding"
+    ],
+    "fording": [
+        "above"
+    ],
+    "enjoy": [
+        "right of",
+        "left of"
+    ],
+    "far to": [
+        "right of",
+        "left of"
+    ],
+    "bending over": [
+        "right of",
+        "left of"
+    ],
+    "cutting": [
+        "right of",
+        "left of"
+    ],
+    "splayed": [
+        "right of",
+        "left of",
+        "above",
+        "below"
+    ],
+    "steak": [
+        "right of",
+        "left of",
+        "above",
+        "below"
+    ],
+    "photos": [
+        "surrounding"
+    ],
+    "looking into": [
+        "surrounding"
+    ],
+    "dipping": [
+        "inside"
+    ],
+    "looking out": [
+        "inside"
+    ],
+    "kneels": [
+        "right of",
+        "left of"
+    ],
+    "down to": [
+        "right of",
+        "left of"
+    ],
+    "answered": [
+        "surrounding"
+    ],
+    "wades through": [
+        "surrounding"
+    ],
+    "sharing": [
+        "inside"
+    ],
+    "charge": [
+        "surrounding"
+    ],
+    "overhang": [
+        "inside"
+    ],
+    "eat": [
+        "right of",
+        "left of"
+    ],
+    "arched": [
+        "above"
+    ],
+    "tied": [
+        "right of",
+        "left of",
+        "above"
+    ],
+    "pulled off": [
+        "right of",
+        "left of"
+    ],
+    "leave": [
+        "right of",
+        "left of"
+    ],
+    "preening": [
+        "above",
+        "right of",
+        "left of",
+        "surrounding"
+    ],
+    "lift": [
+        "above"
+    ],
+    "gets on": [
+        "above"
+    ],
+    "keep": [
+        "inside"
+    ],
+    "in front of": [
+        "above"
+    ],
+    "up to": [
+        "inside"
+    ],
+    "contorts": [
+        "inside"
+    ],
+    "outstretches": [
+        "right of",
+        "left of"
+    ],
+    "biting": [
+        "right of",
+        "left of"
+    ],
+    "close through": [
+        "right of",
+        "left of",
+        "surrounding"
+    ],
+    "messy with": [
+        "surrounding"
+    ],
+    "visit": [
+        "surrounding"
+    ],
+    "asleep at": [
+        "above"
+    ],
+    "in to": [
+        "above"
+    ],
+    "lifted off": [
+        "above"
+    ],
+    "dips": [
+        "below"
+    ],
+    "delivering": [
+        "right of",
+        "left of"
+    ],
+    "kicking around": [
+        "right of",
+        "left of"
+    ],
+    "trace": [
+        "right of",
+        "left of"
+    ],
+    "ties": [
+        "above"
+    ],
+    "playing at": [
+        "above"
+    ],
+    "shining": [
+        "surrounding"
+    ],
+    "rigging": [
+        "right of",
+        "left of",
+        "surrounding"
+    ],
+    "jogging": [
+        "above"
+    ],
+    "remove": [
+        "surrounding"
+    ],
+    "full of": [
+        "inside"
+    ],
+    "came from": [
+        "surrounding"
+    ],
+    "dwarfed": [
+        "surrounding"
+    ],
+    "unboard": [
+        "above"
+    ],
+    "close into": [
+        "surrounding"
+    ],
+    "above beside": [
+        "above",
+        "below",
+        "right of",
+        "left of"
+    ],
+    "bumped into": [
+        "right of",
+        "left of",
+        "surrounding"
+    ],
+    "think": [
+        "inside"
+    ],
+    "many with": [
+        "surrounding"
+    ],
+    "windows": [
+        "surrounding"
+    ],
+    "cleaned": [
+        "right of",
+        "left of"
+    ],
+    "stopped by": [
+        "above",
+        "right of",
+        "left of"
+    ],
+    "outstretched": [
+        "surrounding"
+    ],
+    "roll in": [
+        "above",
+        "right of",
+        "left of",
+        "surrounding"
+    ],
+    "rip": [
+        "surrounding"
+    ],
+    "fondling": [
+        "surrounding"
+    ],
+    "grace": [
+        "above",
+        "inside"
+    ],
+    "brighten": [
+        "above"
+    ],
+    "going into": [
+        "above",
+        "below",
+        "right of",
+        "left of"
+    ],
+    "containg": [
+        "inside"
+    ],
+    "avoids": [
+        "above",
+        "below",
+        "right of",
+        "left of"
+    ],
+    "flanking": [
+        "right of",
+        "left of"
+    ],
+    "played on": [
+        "above"
+    ],
+    "mixed": [
+        "surrounding",
+        "inside"
+    ],
+    "runs across": [
+        "above"
+    ],
+    "devouring": [
+        "inside"
+    ],
+    "weaing": [
+        "surrounding"
+    ],
+    "peaks": [
+        "surrounding"
+    ],
+    "sponsor": [
+        "surrounding"
+    ],
+    "seeds": [
+        "above"
+    ],
+    "shaped": [
+        "surrounding"
+    ],
+    "throwing": [
+        "right of",
+        "left of"
+    ],
+    "trots": [
+        "surrounding"
+    ],
+    "possesses": [
+        "inside"
+    ],
+    "hangs onto": [
+        "above"
+    ],
+    "smells": [
+        "right of",
+        "left of",
+        "surrounding"
+    ],
+    "amid": [
+        "above"
+    ],
+    "gringing": [
+        "above",
+        "inside",
+        "surrounding"
+    ],
+    "awed": [
+        "surrounding"
+    ],
+    "face": [
+        "above",
+        "below"
+    ],
+    "playing around": [
+        "surrounding",
+        "above",
+        "below",
+        "right of",
+        "left of"
+    ],
+    "check": [
+        "surrounding"
+    ],
+    "caught on": [
+        "above"
+    ],
+    "hanging over": [
+        "above",
+        "below"
+    ],
+    "inane": [
+        "inside"
+    ],
+    "exchange": [
+        "right of",
+        "left of",
+        "surrounding"
+    ],
+    "learning": [
+        "surrounding"
+    ],
+    "acting": [
+        "surrounding"
+    ],
+    "run across": [
+        "right of",
+        "left of"
+    ],
+    "under": [
+        "below"
+    ],
+    "colored": [
+        "surrounding"
+    ],
+    "covers": [
+        "inside"
+    ],
+    "highlighting": [
+        "surrounding"
+    ],
+    "warns": [
+        "surrounding"
+    ],
+    "manuevering": [
+        "surrounding"
+    ],
+    "along toward": [
+        "above"
+    ],
+    "coming into": [
+        "right of",
+        "left of"
+    ],
+    "slamming": [
+        "right of",
+        "left of"
+    ],
+    "watering": [
+        "right of",
+        "left of"
+    ],
+    "looks into": [
+        "inside"
+    ],
+    "pays": [
+        "surrounding"
+    ],
+    "inside on": [
+        "inside"
+    ],
+    "stirring": [
+        "inside"
+    ],
+    "platting": [
+        "surrounding"
+    ],
+    "engined": [
+        "above"
+    ],
+    "looks in": [
+        "surrounding"
+    ],
+    "falls in": [
+        "surrounding"
+    ],
+    "let": [
+        "right of",
+        "left of",
+        "surrounding"
+    ],
+    "missed": [
+        "surrounding"
+    ],
+    "rounded": [
+        "surrounding"
+    ],
+    "steered": [
+        "right of",
+        "left of"
+    ],
+    "shelving": [
+        "above"
+    ],
+    "perform": [
+        "surrounding"
+    ],
+    "accessing": [
+        "surrounding"
+    ],
+    "infront of": [
+        "above",
+        "below"
+    ],
+    "siking": [
+        "above"
+    ],
+    "before after": [
+        "right of",
+        "left of"
+    ],
+    "exposes": [
+        "surrounding"
+    ],
+    "wheeled": [
+        "above"
+    ],
+    "draws": [
+        "surrounding"
+    ],
+    "informs": [
+        "surrounding"
+    ],
+    "jump in": [
+        "inside"
+    ],
+    "crops": [
+        "above"
+    ],
+    "lights up": [
+        "surrounding"
+    ],
+    "bikes": [
+        "above"
+    ],
+    "carveing": [
+        "above"
+    ],
+    "treks": [
+        "above"
+    ],
+    "drenching": [
+        "surrounding"
+    ],
+    "directed": [
+        "surrounding"
+    ],
+    "sat by": [
+        "above"
+    ],
+    "assembling": [
+        "surrounding"
+    ],
+    "arresting": [
+        "right of",
+        "left of",
+        "surrounding"
+    ],
+    "shown in": [
+        "right of",
+        "left of"
+    ],
+    "levitating": [
+        "above"
+    ],
+    "trimmed": [
+        "surrounding"
+    ],
+    "falling off": [
+        "below",
+        "above"
+    ],
+    "balancing": [
+        "surrounding"
+    ],
+    "sky": [
+        "above"
+    ],
+    "goes about": [
+        "surrounding"
+    ],
+    "sliding": [
+        "above"
+    ],
+    "before": [
+        "right of",
+        "left of"
+    ],
+    "toucing": [
+        "above",
+        "below",
+        "right of",
+        "left of"
+    ],
+    "tasting": [
+        "above"
+    ],
+    "stand aside": [
+        "right of",
+        "left of"
+    ],
+    "bounces off": [
+        "above"
+    ],
+    "installing": [
+        "surrounding"
+    ],
+    "sitting around": [
+        "surrounding"
+    ],
+    "kissed": [
+        "right of",
+        "left of",
+        "surrounding"
+    ],
+    "overpasses": [
+        "above"
+    ],
+    "high at": [
+        "surrounding"
+    ],
+    "visible in": [
+        "inside"
+    ],
+    "scours": [
+        "surrounding"
+    ],
+    "photographing": [
+        "right of",
+        "left of",
+        "above",
+        "below"
+    ],
+    "try": [
+        "surrounding"
+    ],
+    "pulls through": [
+        "inside"
+    ],
+    "setting": [
+        "surrounding"
+    ],
+    "appropriate for": [
+        "surrounding"
+    ],
+    "curtain": [
+        "surrounding"
+    ],
+    "strapped with": [
+        "right of",
+        "left of",
+        "surrounding"
+    ],
+    "white to": [
+        "right of",
+        "left of",
+        "surrounding"
+    ],
+    "slowing": [
+        "surrounding"
+    ],
+    "proceeds": [
+        "surrounding"
+    ],
+    "stenciled": [
+        "surrounding"
+    ],
+    "blurred": [
+        "surrounding"
+    ],
+    "looking over": [
+        "surrounding"
+    ],
+    "crooks": [
+        "surrounding"
+    ],
+    "don": [
+        "above"
+    ],
+    "sitares": [
+        "surrounding"
+    ],
+    "focused on": [
+        "surrounding"
+    ],
+    "cheer": [
+        "surrounding"
+    ],
+    "open in": [
+        "above"
+    ],
+    "underneath to": [
+        "below"
+    ],
+    "greats": [
+        "surrounding"
+    ],
+    "reflected": [
+        "above"
+    ],
+    "clean at": [
+        "right of",
+        "left of"
+    ],
+    "planning": [
+        "surrounding"
+    ],
+    "along beside": [
+        "right of",
+        "left of",
+        "surrounding"
+    ],
+    "stands around": [
+        "right of",
+        "left of",
+        "surrounding"
+    ],
+    "adjust": [
+        "surrounding"
+    ],
+    "elephants": [
+        "surrounding"
+    ],
+    "milked": [
+        "above",
+        "below",
+        "right of",
+        "left of",
+        "surrounding"
+    ],
+    "ate in": [
+        "surrounding"
+    ],
+    "rushing": [
+        "surrounding"
+    ],
+    "poles": [
+        "right of",
+        "left of"
+    ],
+    "button": [
+        "above"
+    ],
+    "lean to": [
+        "right of",
+        "left of",
+        "surrounding"
+    ],
+    "up out": [
+        "surrounding"
+    ],
+    "down past": [
+        "above"
+    ],
+    "combines": [
+        "surrounding"
+    ],
+    "try for": [
+        "surrounding"
+    ],
+    "elk": [
+        "surrounding"
+    ],
+    "flares": [
+        "surrounding"
+    ],
+    "burnt": [
+        "surrounding"
+    ],
+    "staking": [
+        "surrounding"
+    ],
+    "addresses": [
+        "surrounding"
+    ],
+    "filled": [
+        "inside"
+    ],
+    "descending": [
+        "surrounding"
+    ],
+    "getting to": [
+        "right of",
+        "left of",
+        "surrounding",
+        "inside"
+    ],
+    "gets across": [
+        "above",
+        "surrounding"
+    ],
+    "straddles": [
+        "above"
+    ],
+    "be": [
+        "surrounding"
+    ],
+    "directing": [
+        "right of",
+        "left of"
+    ],
+    "resembles": [
+        "surrounding"
+    ],
+    "next during": [
+        "above",
+        "right of",
+        "left of"
+    ],
+    "sits": [
+        "above"
+    ],
+    "playson": [
+        "above"
+    ],
+    "para": [
+        "surrounding"
+    ],
+    "ride": [
+        "above"
+    ],
+    "near with": [
+        "right of",
+        "left of",
+        "above",
+        "below",
+        "surrounding"
+    ],
+    "sit over": [
+        "surrounding"
+    ],
+    "contain": [
+        "inside"
+    ],
+    "laying on": [
+        "above"
+    ],
+    "sands": [
+        "surrounding"
+    ],
+    "tacking": [
+        "above",
+        "below",
+        "right of",
+        "left of",
+        "surrounding"
+    ],
+    "shovel": [
+        "above"
+    ],
+    "rides on": [
+        "above"
+    ],
+    "hang over": [
+        "above",
+        "below",
+        "right of",
+        "left of",
+        "surrounding"
+    ],
+    "overgrown": [
+        "right of",
+        "left of"
+    ],
+    "telegraphs": [
+        "surrounding"
+    ],
+    "steering": [
+        "above"
+    ],
+    "photographed": [
+        "above"
+    ],
+    "runs into": [
+        "right of",
+        "left of"
+    ],
+    "beat": [
+        "right of",
+        "left of"
+    ],
+    "pictured": [
+        "surrounding"
+    ],
+    "chasing": [
+        "right of",
+        "left of"
+    ],
+    "zooms": [
+        "right of",
+        "left of"
+    ],
+    "locking": [
+        "surrounding"
+    ],
+    "overstretches": [
+        "right of",
+        "left of",
+        "surrounding"
+    ],
+    "eats in": [
+        "below"
+    ],
+    "holding": [
+        "above",
+        "right of",
+        "left of"
+    ],
+    "sporting": [
+        "surrounding"
+    ],
+    "full in": [
+        "surrounding"
+    ],
+    "effected": [
+        "surrounding"
+    ],
+    "washed": [
+        "right of",
+        "left of",
+        "above",
+        "surrounding"
+    ],
+    "chewed": [
+        "inside"
+    ],
+    "pose": [
+        "inside"
+    ],
+    "stacked": [
+        "above"
+    ],
+    "capped": [
+        "above"
+    ],
+    "folded": [
+        "above"
+    ],
+    "out in": [
+        "above"
+    ],
+    "welcoming": [
+        "surrounding"
+    ],
+    "ski": [
+        "above"
+    ],
+    "focuses on": [
+        "inside"
+    ],
+    "puffing": [
+        "above",
+        "surrounding"
+    ],
+    "enjoys": [
+        "surrounding"
+    ],
+    "trailing": [
+        "below"
+    ],
+    "grows from": [
+        "above",
+        "right of",
+        "left of"
+    ],
+    "ensure": [
+        "above"
+    ],
+    "unraveling": [
+        "above"
+    ],
+    "travel": [
+        "surrounding"
+    ],
+    "bordered": [
+        "below"
+    ],
+    "powered": [
+        "surrounding"
+    ],
+    "inn": [
+        "surrounding"
+    ],
+    "took": [
+        "surrounding"
+    ],
+    "maneuvering": [
+        "surrounding"
+    ],
+    "securing": [
+        "above"
+    ],
+    "fetches": [
+        "right of",
+        "left of"
+    ],
+    "rounding": [
+        "surrounding"
+    ],
+    "turns": [
+        "right of",
+        "left of",
+        "above",
+        "below",
+        "surrounding"
+    ],
+    "become": [
+        "surrounding"
+    ],
+    "shake": [
+        "right of",
+        "left of",
+        "above",
+        "below",
+        "surrounding"
+    ],
+    "officiates": [
+        "surrounding"
+    ],
+    "slowed": [
+        "above",
+        "surrounding"
+    ],
+    "flashes": [
+        "surrounding"
+    ],
+    "denote": [
+        "above",
+        "surrounding"
+    ],
+    "demolishing": [
+        "surrounding"
+    ],
+    "throws": [
+        "surrounding"
+    ],
+    "sprays": [
+        "surrounding"
+    ],
+    "lift off": [
+        "above"
+    ],
+    "awarded": [
+        "above"
+    ],
+    "keeps": [
+        "surrounding"
+    ],
+    "amused": [
+        "surrounding"
+    ],
+    "reads": [
+        "surrounding"
+    ],
+    "dished": [
+        "above"
+    ],
+    "sells": [
+        "surrounding"
+    ],
+    "sniffing around": [
+        "surrounding"
+    ],
+    "protect": [
+        "surrounding"
+    ],
+    "mad": [
+        "surrounding"
+    ],
+    "skiing": [
+        "above"
+    ],
+    "patten": [
+        "surrounding"
+    ],
+    "fresh in": [
+        "surrounding"
+    ],
+    "speed": [
+        "surrounding"
+    ],
+    "watching over": [
+        "surrounding"
+    ],
+    "unwraping": [
+        "surrounding"
+    ],
+    "arranges": [
+        "above",
+        "surrounding"
+    ],
+    "finishing": [
+        "surrounding"
+    ],
+    "engulf": [
+        "inside"
+    ],
+    "layed": [
+        "surrounding"
+    ],
+    "downturned": [
+        "below"
+    ],
+    "varies": [
+        "surrounding"
+    ],
+    "roll on": [
+        "above"
+    ],
+    "via": [
+        "surrounding"
+    ],
+    "shares": [
+        "above"
+    ],
+    "secures": [
+        "surrounding"
+    ],
+    "reminding": [
+        "surrounding"
+    ],
+    "plane": [
+        "surrounding"
+    ],
+    "tends": [
+        "surrounding"
+    ],
+    "matching": [
+        "surrounding"
+    ],
+    "grabs": [
+        "right of",
+        "left of",
+        "surrounding",
+        "above",
+        "below"
+    ],
+    "plated": [
+        "above"
+    ],
+    "up": [
+        "above"
+    ],
+    "ensnaring": [
+        "surrounding"
+    ],
+    "topped with": [
+        "above"
+    ],
+    "splays": [
+        "above"
+    ],
+    "captured": [
+        "above",
+        "below",
+        "surrounding"
+    ],
+    "bake": [
+        "above"
+    ],
+    "dows": [
+        "surrounding"
+    ],
+    "describes": [
+        "surrounding",
+        "inside"
+    ],
+    "dispaying": [
+        "surrounding"
+    ],
+    "bump": [
+        "above",
+        "below",
+        "right of",
+        "left of",
+        "surrounding"
+    ],
+    "reached": [
+        "above"
+    ],
+    "brandishes": [
+        "surrounding"
+    ],
+    "wander": [
+        "above"
+    ],
+    "open at": [
+        "above"
+    ],
+    "circling": [
+        "surrounding"
+    ],
+    "looks to": [
+        "surrounding"
+    ],
+    "toys": [
+        "surrounding"
+    ],
+    "sits by": [
+        "above"
+    ],
+    "fries": [
+        "surrounding"
+    ],
+    "available in": [
+        "surrounding"
+    ],
+    "went through": [
+        "surrounding"
+    ],
+    "apiece of": [
+        "surrounding"
+    ],
+    "waring": [
+        "surrounding"
+    ],
+    "squeezes": [
+        "surrounding"
+    ],
+    "drive": [
+        "above"
+    ],
+    "tackles": [
+        "surrounding"
+    ],
+    "shaking": [
+        "surrounding"
+    ],
+    "going down": [
+        "below"
+    ],
+    "back to": [
+        "right of",
+        "left of",
+        "surrounding"
+    ],
+    "passing by": [
+        "inside"
+    ],
+    "fixing": [
+        "inside"
+    ],
+    "approaches": [
+        "surrounding"
+    ],
+    "hitting": [
+        "above",
+        "below",
+        "right of",
+        "left of",
+        "surrounding"
+    ],
+    "helping": [
+        "surrounding"
+    ],
+    "sleeps on": [
+        "above"
+    ],
+    "atop": [
+        "above"
+    ],
+    "cut in": [
+        "above"
+    ],
+    "reaching": [
+        "surrounding"
+    ],
+    "into": [
+        "above",
+        "surrounding"
+    ],
+    "hauling": [
+        "right of",
+        "left of",
+        "surrounding"
+    ],
+    "upon": [
+        "above"
+    ],
+    "on top of": [
+        "surrounding"
+    ],
+    "passes": [
+        "inside"
+    ],
+    "surround": [
+        "surrounding"
+    ],
+    "within": [
+        "above"
+    ],
+    "includes": [
+        "inside"
+    ],
+    "rubbing": [
+        "surrounding"
+    ],
+    "cleaning": [
+        "right of",
+        "left of",
+        "surrounding"
+    ],
+    "inside": [
+        "inside"
+    ],
+    "enjoying": [
+        "surrounding"
+    ],
+    "getting": [
+        "surrounding"
+    ],
+    "with": [
+        "right of",
+        "left of",
+        "surrounding"
+    ],
+    "of": [
+        "inside"
+    ],
+    "licking": [
+        "surrounding"
+    ],
+    "running in": [
+        "above"
+    ],
+    "hugging": [
+        "surrounding"
+    ],
+    "to": [
+        "above"
+    ],
+    "showing": [
+        "surrounding"
+    ],
+    "skateboarding": [
+        "above"
+    ],
+    "down": [
+        "below"
+    ],
+    "cut": [
+        "below"
+    ],
+    "overlooking": [
+        "below"
+    ],
+    "leading": [
+        "right of",
+        "left of"
+    ],
+    "lined": [
+        "right of",
+        "left of"
+    ],
+    "handing": [
+        "inside"
+    ],
+    "grazing": [
+        "right of",
+        "left of"
+    ],
+    "alongside": [
+        "surrounding"
+    ],
+    "growing on": [
+        "surrounding"
+    ],
+    "tiled": [
+        "above"
+    ],
+    "kissing": [
+        "right of",
+        "left of"
+    ],
+    "reading": [
+        "above"
+    ],
+    "along": [
+        "above"
+    ],
+    "jumping": [
+        "below"
+    ],
+    "does": [
+        "inside"
+    ],
+    "pulled": [
+        "right of",
+        "left of",
+        "surrounding"
+    ],
+    "against": [
+        "above",
+        "surrounding"
+    ],
+    "wading in": [
+        "inside"
+    ],
+    "sticking": [
+        "surrounding"
+    ],
+    "sitting in": [
+        "above",
+        "below",
+        "right of",
+        "surrounding"
+    ],
+    "crossing": [
+        "inside"
+    ],
+    "raises": [
+        "surrounding"
+    ],
+    "on side of": [
+        "above"
+    ],
+    "entering": [
+        "inside"
+    ],
+    "show": [
+        "surrounding"
+    ],
+    "pointing": [
+        "surrounding"
+    ],
+    "outside on": [
+        "above"
+    ],
+    "passing through": [
+        "inside"
+    ],
+    "sit in": [
+        "above"
+    ],
+    "do": [
+        "below"
+    ],
+    "spraying": [
+        "above"
+    ],
+    "observing": [
+        "surrounding"
+    ],
+    "teaching": [
+        "surrounding"
+    ],
+    "covered": [
+        "surrounding"
+    ],
+    "opens": [
+        "surrounding"
+    ],
+    "depicts": [
+        "surrounding"
+    ],
+    "viewing": [
+        "surrounding"
+    ],
+    "selling": [
+        "surrounding"
+    ],
+    "containing": [
+        "inside"
+    ],
+    "holds": [
+        "inside"
+    ],
+    "laying": [
+        "above"
+    ],
+    "feeding on": [
+        "surrounding"
+    ],
+    "during": [
+        "inside"
+    ],
+    "wears": [
+        "inside"
+    ],
+    "sniffs": [
+        "surrounding"
+    ],
+    "outside": [
+        "surrounding"
+    ],
+    "moving": [
+        "above"
+    ],
+    "displays": [
+        "surrounding"
+    ],
+    "leads": [
+        "surrounding"
+    ],
+    "inside of": [
+        "inside"
+    ],
+    "turning": [
+        "surrounding"
+    ],
+    "held": [
+        "above"
+    ],
+    "seen through": [
+        "surrounding"
+    ],
+    "takes": [
+        "surrounding"
+    ],
+    "next": [
+        "surrounding"
+    ],
+    "standing": [
+        "above"
+    ],
+    "toward": [
+        "above"
+    ],
+    "drinking": [
+        "right of",
+        "left of",
+        "surrounding"
+    ],
+    "next to": [
+        "right of",
+        "left of",
+        "surrounding"
+    ],
+    "mounted": [
+        "above"
+    ],
+    "sits with": [
+        "inside"
+    ],
+    "jumps in": [
+        "above"
+    ],
+    "holding onto": [
+        "right of",
+        "left of"
+    ],
+    "amongst": [
+        "above"
+    ],
+    "catching": [
+        "below"
+    ],
+    "next on": [
+        "below"
+    ],
+    "putting": [
+        "above"
+    ],
+    "take": [
+        "above"
+    ],
+    "covering": [
+        "above"
+    ],
+    "on": [
+        "above"
+    ],
+    "going around": [
+        "surrounding"
+    ],
+    "above": [
+        "above"
+    ],
+    "look": [
+        "inside"
+    ],
+    "blocking": [
+        "inside"
+    ],
+    "looking to": [
+        "surrounding"
+    ],
+    "standing around": [
+        "above"
+    ],
+    "prepare": [
+        "surrounding"
+    ],
+    "awaiting": [
+        "inside"
+    ],
+    "use": [
+        "right of",
+        "left of",
+        "surrounding"
+    ],
+    "hangs on": [
+        "below"
+    ],
+    "picking": [
+        "inside"
+    ],
+    "making": [
+        "right of",
+        "left of"
+    ],
+    "lays on": [
+        "above"
+    ],
+    "flying": [
+        "above"
+    ],
+    "depicting": [
+        "surrounding"
+    ],
+    "snowboarding": [
+        "above"
+    ],
+    "off": [
+        "surrounding"
+    ],
+    "chewing on": [
+        "inside"
+    ],
+    "rides": [
+        "surrounding"
+    ],
+    "jumps": [
+        "below"
+    ],
+    "reflecting": [
+        "surrounding"
+    ],
+    "leaving": [
+        "right of",
+        "left of"
+    ],
+    "works on": [
+        "surrounding"
+    ],
+    "gives": [
+        "surrounding"
+    ],
+    "doing": [
+        "above"
+    ],
+    "below": [
+        "below"
+    ],
+    "pulls": [
+        "right of",
+        "left of"
+    ],
+    "plays with": [
+        "right of",
+        "left of"
+    ],
+    "adjusting": [
+        "surrounding"
+    ],
+    "out": [
+        "surrounding"
+    ],
+    "outside with": [
+        "surrounding"
+    ],
+    "passing": [
+        "inside",
+        "right of",
+        "left of"
+    ],
+    "from": [
+        "above"
+    ],
+    "smoking": [
+        "surrounding"
+    ],
+    "raising": [
+        "above"
+    ],
+    "complete with": [
+        "above"
+    ],
+    "on the side of": [
+        "right of",
+        "left of"
+    ],
+    "thrown": [
+        "right of",
+        "left of"
+    ],
+    "walking into": [
+        "right of",
+        "left of",
+        "surrounding",
+        "inside"
+    ],
+    "cuts": [
+        "surrounding"
+    ],
+    "among": [
+        "above"
+    ],
+    "hit": [
+        "right of",
+        "left of"
+    ],
+    "smelling": [
+        "right of",
+        "left of"
+    ],
+    "pouring": [
+        "below"
+    ],
+    "prepares": [
+        "surrounding"
+    ],
+    "walks": [
+        "above"
+    ],
+    "thru": [
+        "inside"
+    ],
+    "have": [
+        "right of",
+        "left of",
+        "above"
+    ],
+    "towing": [
+        "right of",
+        "left of",
+        "surrounding"
+    ],
+    "next with": [
+        "surrounding"
+    ],
+    "indicating": [
+        "surrounding"
+    ],
+    "through": [
+        "inside"
+    ],
+    "using": [
+        "right of",
+        "left of",
+        "above"
+    ],
+    "around": [
+        "surrounding"
+    ],
+    "without": [
+        "surrounding"
+    ],
+    "drives": [
+        "inside"
+    ],
+    "crosses": [
+        "surrounding"
+    ],
+    "standing by": [
+        "above"
+    ],
+    "stopped in": [
+        "above"
+    ],
+    "play": [
+        "right of",
+        "left of"
+    ],
+    "sit around": [
+        "above"
+    ],
+    "performing": [
+        "above"
+    ],
+    "coming down": [
+        "below"
+    ],
+    "ridding": [
+        "inside"
+    ],
+    "about": [
+        "surrounding"
+    ],
+    "ride on": [
+        "above"
+    ],
+    "makes": [
+        "surrounding"
+    ],
+    "hanging on": [
+        "below"
+    ],
+    "towards": [
+        "surrounding"
+    ],
+    "made": [
+        "surrounding"
+    ],
+    "serving": [
+        "right of"
+    ],
+    "sitting": [
+        "above"
+    ],
+    "high in": [
+        "above"
+    ],
+    "fly": [
+        "above"
+    ],
+    "running": [
+        "surrounding"
+    ],
+    "at": [
+        "above"
+    ],
+    "gets": [
+        "above"
+    ],
+    "like": [
+        "surrounding"
+    ],
+    "skate": [
+        "above"
+    ],
+    "outside of": [
+        "surrounding"
+    ],
+    "touching": [
+        "right of",
+        "left of"
+    ],
+    "waiting in": [
+        "inside"
+    ],
+    "stands by": [
+        "above"
+    ],
+    "after": [
+        "above"
+    ],
+    "running across": [
+        "right of",
+        "left of"
+    ],
+    "surrounding": [
+        "surrounding"
+    ],
+    "is": [
+        "surrounding"
+    ],
+    "underneath": [
+        "below"
+    ],
+    "opening": [
+        "surrounding"
+    ],
+    "stand around": [
+        "above"
+    ],
+    "practicing": [
+        "surrounding"
+    ],
+    "tossing": [
+        "right of",
+        "left of"
+    ],
+    "hold": [
+        "surrounding"
+    ],
+    "sign": [
+        "surrounding"
+    ],
+    "serves": [
+        "surrounding"
+    ],
+    "grinding": [
+        "surrounding"
+    ],
+    "traveling": [
+        "above"
+    ],
+    "line": [
+        "surrounding"
+    ],
+    "having": [
+        "surrounding"
+    ],
+    "walking": [
+        "above"
+    ],
+    "waiting on": [
+        "surrounding"
+    ],
+    "looking in": [
+        "above"
+    ],
+    "carries": [
+        "right of",
+        "left of"
+    ],
+    "riding": [
+        "above"
+    ],
+    "brushing": [
+        "inside"
+    ],
+    "playing": [
+        "right of",
+        "left of",
+        "surrounding"
+    ],
+    "looking for": [
+        "surrounding"
+    ],
+    "pours": [
+        "right of",
+        "left of"
+    ],
+    "swinging": [
+        "right of",
+        "left of"
+    ],
+    "jumping on": [
+        "above"
+    ],
+    "moving on": [
+        "surrounding"
+    ],
+    "catches": [
+        "right of",
+        "left of"
+    ],
+    "pulling": [
+        "right of",
+        "left of"
+    ],
+    "including": [
+        "inside"
+    ],
+    "lining": [
+        "inside"
+    ],
+    "eats": [
+        "right of",
+        "left of"
+    ],
+    "made with": [
+        "right of",
+        "left of"
+    ],
+    "hanging": [
+        "below"
+    ],
+    "bear with": [
+        "surrounding"
+    ],
+    "plays": [
+        "surrounding"
+    ],
+    "attempting": [
+        "surrounding"
+    ],
+    "cross": [
+        "surrounding"
+    ],
+    "lady": [
+        "surrounding"
+    ],
+    "golds": [
+        "surrounding"
+    ],
+    "knows": [
+        "surrounding"
+    ],
+    "brightening": [
+        "surrounding"
+    ],
+    "emphasizing": [
+        "surrounding",
+        "surrounding"
+    ],
+    "rolling in": [
+        "surrounding"
+    ],
+    "paste": [
+        "surrounding"
+    ],
+    "lasso": [
+        "surrounding"
+    ],
+    "battles": [
+        "surrounding"
+    ],
+    "share": [
+        "surrounding"
+    ],
+    "scooped": [
+        "below"
+    ],
+    "fresh off": [
+        "surrounding"
+    ],
+    "kicked": [
+        "right of",
+        "left of"
+    ],
+    "grass on": [
+        "above"
+    ],
+    "allowed": [
+        "surrounding"
+    ],
+    "open for": [
+        "surrounding"
+    ],
+    "marrying": [
+        "right of",
+        "left of"
+    ],
+    "eat in": [
+        "inside"
+    ],
+    "orders": [
+        "surrounding"
+    ],
+    "wide by": [
+        "surrounding"
+    ],
+    "couples": [
+        "right of",
+        "left of"
+    ],
+    "beds": [
+        "surrounding"
+    ],
+    "ying": [
+        "surrounding"
+    ],
+    "groomed": [
+        "surrounding"
+    ],
+    "as": [
+        "surrounding"
+    ],
+    "nibbling": [
+        "inside"
+    ],
+    "works": [
+        "surrounding"
+    ],
+    "stuffed": [
+        "inside"
+    ],
+    "milling around": [
+        "surrounding"
+    ],
+    "wanders": [
+        "surrounding"
+    ],
+    "get": [
+        "surrounding"
+    ],
+    "questioning": [
+        "surrounding"
+    ],
+    "turns to": [
+        "right of",
+        "left of"
+    ],
+    "lifting": [
+        "above"
+    ],
+    "raise": [
+        "above"
+    ],
+    "show in": [
+        "above"
+    ],
+    "named": [
+        "surrounding"
+    ],
+    "extend": [
+        "surrounding"
+    ],
+    "back in": [
+        "surrounding"
+    ],
+    "toasts": [
+        "right of",
+        "left of"
+    ],
+    "visited": [
+        "surrounding"
+    ],
+    "knitted": [
+        "surrounding"
+    ],
+    "unfolds": [
+        "surrounding"
+    ],
+    "deter": [
+        "surrounding"
+    ],
+    "run over": [
+        "above"
+    ],
+    "man": [
+        "surrounding"
+    ],
+    "played at": [
+        "above"
+    ],
+    "descends": [
+        "below"
+    ],
+    "peaking": [
+        "above"
+    ],
+    "next over": [
+        "surrounding"
+    ],
+    "across to": [
+        "surrounding"
+    ],
+    "celebrates": [
+        "surrounding"
+    ],
+    "programming": [
+        "surrounding"
+    ],
+    "frosted": [
+        "surrounding"
+    ],
+    "parks": [
+        "surrounding"
+    ],
+    "laden": [
+        "surrounding"
+    ],
+    "match": [
+        "surrounding"
+    ],
+    "seperating": [
+        "inside"
+    ],
+    "run with": [
+        "surrounding"
+    ],
+    "toying with": [
+        "right of",
+        "left of"
+    ],
+    "holding with": [
+        "surrounding"
+    ],
+    "plays at": [
+        "surrounding"
+    ],
+    "snowboard": [
+        "surrounding"
+    ],
+    "enhances": [
+        "surrounding"
+    ],
+    "exposed": [
+        "surrounding"
+    ],
+    "three with": [
+        "surrounding"
+    ],
+    "expressing": [
+        "surrounding"
+    ],
+    "situated": [
+        "above"
+    ],
+    "shears": [
+        "surrounding"
+    ],
+    "photographs": [
+        "surrounding"
+    ],
+    "mounting": [
+        "surrounding"
+    ],
+    "bagging": [
+        "inside"
+    ],
+    "late in": [
+        "surrounding"
+    ],
+    "shoeing": [
+        "below"
+    ],
+    "cranes": [
+        "above"
+    ],
+    "run on": [
+        "surrounding"
+    ],
+    "runs for": [
+        "surrounding"
+    ],
+    "twists": [
+        "surrounding"
+    ],
+    "enters into": [
+        "inside"
+    ],
+    "fell off": [
+        "below"
+    ],
+    "rode": [
+        "above"
+    ],
+    "packs": [
+        "inside"
+    ],
+    "lean on": [
+        "right of",
+        "left of"
+    ],
+    "drops off": [
+        "below"
+    ],
+    "open over": [
+        "surrounding"
+    ],
+    "unpacks": [
+        "surrounding"
+    ],
+    "roaring": [
+        "surrounding"
+    ],
+    "warped": [
+        "surrounding"
+    ],
+    "thinking": [
+        "surrounding"
+    ],
+    "shapped": [
+        "surrounding"
+    ],
+    "waiting": [
+        "right of",
+        "left of"
+    ],
+    "goes past": [
+        "above"
+    ],
+    "pokes": [
+        "surrounding"
+    ],
+    "pin": [
+        "surrounding"
+    ],
+    "combs": [
+        "surrounding"
+    ],
+    "picks": [
+        "surrounding"
+    ],
+    "turned against": [
+        "surrounding"
+    ],
+    "laden with": [
+        "above"
+    ],
+    "stems from": [
+        "surrounding"
+    ],
+    "tagging": [
+        "surrounding"
+    ],
+    "shoves": [
+        "right of",
+        "left of"
+    ],
+    "first on": [
+        "surrounding"
+    ],
+    "kicking": [
+        "right of",
+        "left of"
+    ],
+    "onto": [
+        "surrounding"
+    ],
+    "playing with": [
+        "right of",
+        "left of"
+    ],
+    "besides": [
+        "right of",
+        "left of"
+    ],
+    "walks on": [
+        "above"
+    ],
+    "facing": [
+        "right of",
+        "left of"
+    ],
+    "taking": [
+        "above"
+    ],
+    "tying": [
+        "surrounding"
+    ],
+    "watching": [
+        "surrounding",
+        "above",
+        "below",
+        "right of",
+        "left of"
+    ],
+    "carrying": [
+        "surrounding"
+    ],
+    "feeds": [
+        "surrounding"
+    ],
+    "sit on": [
+        "above"
+    ],
+    "features": [
+        "surrounding"
+    ],
+    "grabbing": [
+        "right of",
+        "left of"
+    ],
+    "sticks": [
+        "above"
+    ],
+    "sitting with": [
+        "above"
+    ],
+    "saying": [
+        "surrounding"
+    ],
+    "rowing": [
+        "above"
+    ],
+    "leading to": [
+        "surrounding"
+    ],
+    "going over": [
+        "surrounding"
+    ],
+    "sitting on": [
+        "above"
+    ],
+    "beside": [
+        "right of",
+        "left of"
+    ],
+    "stand by": [
+        "above"
+    ],
+    "flipping": [
+        "surrounding"
+    ],
+    "eating in": [
+        "inside"
+    ],
+    "behind": [
+        "right of",
+        "left of"
+    ],
+    "working on": [
+        "above"
+    ],
+    "eating": [
+        "inside"
+    ],
+    "pets": [
+        "surrounding"
+    ],
+    "surrounded": [
+        "surrounding"
+    ],
+    "away from": [
+        "surrounding"
+    ],
+    "giving": [
+        "right of",
+        "left of"
+    ],
+    "drawn": [
+        "above"
+    ],
+    "are": [
+        "surrounding"
+    ],
+    "missing": [
+        "surrounding"
+    ],
+    "surfing": [
+        "above"
+    ],
+    "returning": [
+        "surrounding"
+    ],
+    "uses": [
+        "surrounding"
+    ],
+    "pass": [
+        "inside"
+    ],
+    "looks over": [
+        "above"
+    ],
+    "carry": [
+        "surrounding"
+    ],
+    "between": [
+        "right of",
+        "left of"
+    ],
+    "parked": [
+        "above"
+    ],
+    "sniffing": [
+        "surrounding"
+    ],
+    "hits": [
+        "right of",
+        "left of"
+    ],
+    "loading": [
+        "surrounding"
+    ],
+    "climbing": [
+        "above"
+    ],
+    "preparing": [
+        "surrounding"
+    ],
+    "washing": [
+        "surrounding"
+    ],
+    "approaching": [
+        "surrounding"
+    ],
+    "leaning on": [
+        "right of",
+        "left of"
+    ],
+    "checks": [
+        "surrounding"
+    ],
+    "rests": [
+        "surrounding"
+    ],
+    "while": [
+        "surrounding"
+    ],
+    "over": [
+        "above"
+    ],
+    "outside in": [
+        "surrounding"
+    ],
+    "sitting by": [
+        "above"
+    ],
+    "wearing": [
+        "surrounding"
+    ],
+    "sits on": [
+        "above"
+    ],
+    "skis": [
+        "surrounding"
+    ],
+    "painting": [
+        "above"
+    ],
+    "racing": [
+        "surrounding"
+    ],
+    "featuring": [
+        "surrounding"
+    ],
+    "touches": [
+        "right of",
+        "left of"
+    ],
+    "going": [
+        "surrounding"
+    ],
+    "shows": [
+        "above"
+    ],
+    "make": [
+        "surrounding"
+    ],
+    "lit": [
+        "surrounding"
+    ],
+    "stop": [
+        "surrounding"
+    ],
+    "swings": [
+        "surrounding"
+    ],
+    "herding": [
+        "surrounding"
+    ],
+    "riding on": [
+        "above"
+    ],
+    "boarding": [
+        "above"
+    ],
+    "left on": [
+        "left of"
+    ],
+    "by": [
+        "surrounding"
+    ],
+    "displaying": [
+        "above"
+    ],
+    "sits in": [
+        "above"
+    ],
+    "placing": [
+        "above"
+    ],
+    "sleeping on": [
+        "above"
+    ],
+    "slicing": [
+        "right of",
+        "left of"
+    ],
+    "jumping in": [
+        "above"
+    ],
+    "beneath": [
+        "below"
+    ],
+    "watches": [
+        "surrounding"
+    ],
+    "walk on": [
+        "above"
+    ],
+    "in": [
+        "inside"
+    ],
+    "close to": [
+        "surrounding",
+        "right of",
+        "left of"
+    ],
+    "pitching": [
+        "above"
+    ],
+    "performs": [
+        "surrounding"
+    ],
+    "across": [
+        "surrounding"
+    ],
+    "is on": [
+        "above"
+    ],
+    "blowing": [
+        "surrounding"
+    ],
+    "petting": [
+        "right of",
+        "left of"
+    ],
+    "eaten": [
+        "inside"
+    ],
+    "playing on": [
+        "right of",
+        "left of"
+    ],
+    "watch": [
+        "surrounding"
+    ],
+    "walking up": [
+        "surrounding"
+    ],
+    "across from": [
+        "right of",
+        "left of"
+    ],
+    "flies": [
+        "surrounding"
+    ],
+    "has": [
+        "surrounding"
+    ],
+    "ready for": [
+        "surrounding"
+    ],
+    "staring": [
+        "surrounding"
+    ],
+    "running through": [
+        "inside"
+    ],
+    "pushing": [
+        "right of",
+        "left of"
+    ],
+    "douses": [
+        "surrounding"
+    ],
+    "melting": [
+        "surrounding"
+    ],
+    "cook": [
+        "surrounding"
+    ],
+    "nibble on": [
+        "inside"
+    ],
+    "presenting": [
+        "above"
+    ],
+    "brought in": [
+        "surrounding"
+    ],
+    "walking out": [
+        "surrounding"
+    ],
+    "surviving": [
+        "surrounding"
+    ],
+    "peeking": [
+        "surrounding"
+    ],
+    "resting": [
+        "surrounding"
+    ],
+    "play with": [
+        "right of",
+        "left of"
+    ],
+    "written in": [
+        "above"
+    ],
+    "kicks": [
+        "right of",
+        "left of"
+    ],
+    "puts": [
+        "right of",
+        "left of"
+    ],
+    "running with": [
+        "right of",
+        "left of",
+        "surrounding"
+    ],
+    "walking on": [
+        "above"
+    ],
+    "full with": [
+        "inside"
+    ],
+    "brushes": [
+        "surrounding"
+    ],
+    "running on": [
+        "above"
+    ],
+    "set": [
+        "inside"
+    ],
+    "celebrating": [
+        "surrounding"
+    ],
+    "for": [
+        "surrounding"
+    ],
+    "operating": [
+        "above"
+    ],
+    "checking": [
+        "inside"
+    ],
+    "past": [
+        "surrounding"
+    ],
+    "going through": [
+        "surrounding"
+    ],
+    "cooking": [
+        "surrounding"
+    ],
+    "holds onto": [
+        "surrounding"
+    ],
+    "driving": [
+        "above"
+    ],
+    "following": [
+        "right of",
+        "left of"
+    ],
+    "peeks": [
+        "surrounding"
+    ],
+    "doubles": [
+        "surrounding"
+    ],
+    "browse": [
+        "surrounding"
+    ],
+    "cars": [
+        "surrounding"
+    ],
+    "rolling on": [
+        "above"
+    ],
+    "look in": [
+        "surrounding"
+    ],
+    "capturing": [
+        "above"
+    ],
+    "boarder": [
+        "surrounding"
+    ],
+    "sharpening": [
+        "surrounding"
+    ],
+    "readying": [
+        "surrounding"
+    ],
+    "remotes": [
+        "surrounding"
+    ],
+    "contains": [
+        "inside"
+    ],
+    "showing through": [
+        "surrounding"
+    ],
+    "feeding": [
+        "right of",
+        "left of"
+    ],
+    "transporting": [
+        "above"
+    ],
+    "inluding": [
+        "inside"
+    ],
+    "catch": [
+        "right of",
+        "left of"
+    ],
+    "in front": [
+        "right of",
+        "left of"
+    ],
+    "sleep on": [
+        "surrounding"
+    ],
+    "hole": [
+        "inside"
+    ],
+    "on top": [
+        "above"
+    ],
+    "nozy": [],
+    "go down": [
+        "right of",
+        "left of"
+    ],
+    "flush": [
+        "right of",
+        "left of"
+    ],
+    "lay on": [
+        "above"
+    ],
+    "walk": [
+        "above"
+    ],
+    "on the side": [
+        "right of",
+        "left of"
+    ],
+    "fly by": [
+        "above"
+    ],
+    "look over": [
+        "right of",
+        "left of"
+    ],
+    "cover": [
+        "surrounding"
+    ],
+    "feed": [
+        "right of",
+        "left of"
+    ],
+    "sit": [
+        "surrounding"
+    ],
+    "away through": [
+        "right of",
+        "left of"
+    ],
+    "follow": [
+        "right of",
+        "left of"
+    ],
+    "read": [
+        "surrounding"
+    ],
+    "stand": [
+        "above"
+    ],
+    "operate": [
+        "surrounding"
+    ],
+    "go over": [
+        "surrounding"
+    ],
+    "move on": [
+        "right of",
+        "left of"
+    ],
+    "alone on": [
+        "right of",
+        "left of"
+    ],
+    "pass on": [
+        "right of",
+        "left of"
+    ],
+    "herd": [
+        "above"
+    ],
+    "sit by": [
+        "above"
+    ],
+    "sniff": [
+        "surrounding"
+    ],
+    "transport": [
+        "surrounding"
+    ],
+    "wear": [
+        "surrounding"
+    ],
+    "land": [
+        "above"
+    ],
+    "chase": [
+        "surrounding"
+    ],
+    "observe": [
+        "right of",
+        "left of"
+    ],
+    "plow": [
+        "right of",
+        "left of"
+    ],
+    "bear": [
+        "surrounding"
+    ],
+    "put": [
+        "above"
+    ],
+    "tie": [
+        "surrounding"
+    ],
+    "pet": [
+        "surrounding"
+    ],
+    "toss": [
+        "surrounding"
+    ],
+    "lay": [
+        "above"
+    ],
+    "move": [
+        "right of",
+        "left of"
+    ],
+    "look into": [
+        "surrounding"
+    ],
+    "run in": [
+        "above"
+    ],
+    "jump": [
+        "above"
+    ],
+    "die": [
+        "surrounding"
+    ],
+    "grow from": [
+        "surrounding"
+    ],
+    "grow on": [
+        "surrounding"
+    ],
+    "chew": [
+        "surrounding"
+    ],
+    "go": [
+        "right of",
+        "left of"
+    ],
+    "grind on": [
+        "surrounding"
+    ],
+    "run through": [
+        "right of",
+        "left of"
+    ],
+    "join": [
+        "surrounding"
+    ],
+    "rid": [
+        "above"
+    ],
+    "hold onto": [
+        "above"
+    ],
+    "fall in": [
+        "surrounding"
+    ],
+    "slice": [
+        "surrounding"
+    ],
+    "swinge": [
+        "surrounding"
+    ],
+    "craft": [
+        "right of",
+        "left of"
+    ],
+    "sip": [
+        "right of",
+        "left of"
+    ],
+    "park in front": [
+        "right of",
+        "left of"
+    ],
+    "sit in front": [
+        "surrounding"
+    ],
+    "stand in front": [
+        "right of",
+        "left of"
+    ],
+    "sit on top": [
+        "above"
+    ],
+    "open with": [
+        "surrounding"
+    ],
+    "stand on top": [
+        "above"
+    ],
+    "stand on the side": [
+        "right of",
+        "left of"
+    ],
+    "hang in front": [
+        "right of",
+        "left of"
+    ],
+    "float on top": [
+        "above"
+    ],
+    "cluttered with": [
+        "surrounding"
+    ],
+    "carpet": [
+        "below"
+    ],
+    "empty with": [
+        "surrounding"
+    ],
+    "break": [
+        "right of",
+        "left of"
+    ],
+    "miss": [
+        "right of",
+        "left of"
+    ],
+    "stove": [
+        "surrounding"
+    ],
+    "low to": [
+        "below"
+    ],
+    "white with": [
+        "surrounding"
+    ],
+    "reveal": [
+        "surrounding"
+    ],
+    "hydrant on": [
+        "above"
+    ],
+    "on the SIDE": [
+        "right of",
+        "left of"
+    ],
+    "enter": [
+        "inside"
+    ],
+    "bow": [
+        "above"
+    ],
+    "green above": [
+        "above"
+    ],
+    "aboard": [
+        "inside"
+    ],
+    "hydrant near": [
+        "right of",
+        "left of"
+    ],
+    "push": [
+        "right of",
+        "left of"
+    ],
+    "scratch": [
+        "surrounding"
+    ],
+    "on side": [
+        "right of",
+        "left of"
+    ],
+    "throughout": [
+        "right of",
+        "left of"
+    ],
+    "chew on": [
+        "surrounding"
+    ],
+    "plate": [
+        "above"
+    ],
+    "down in": [
+        "below"
+    ],
+    "play on": [
+        "above"
+    ],
+    "include": [
+        "surrounding"
+    ],
+    "look to": [
+        "right of",
+        "left of"
+    ],
+    "throw": [
+        "right of",
+        "left of"
+    ],
+    "ready on": [
+        "surrounding"
+    ],
+    "beyond": [
+        "inside"
+    ],
+    "cluttered on": [
+        "above"
+    ],
+    "tenn": [
+        "surrounding"
+    ],
+    "serve": [
+        "surrounding"
+    ],
+    "big than": [
+        "surrounding"
+    ],
+    "free from": [
+        "right of",
+        "left of"
+    ],
+    "be on": [
+        "above"
+    ],
+    "wipe": [
+        "surrounding"
+    ],
+    "hang on": [
+        "above"
+    ],
+    "shape": [
+        "surrounding"
+    ],
+    "over under": [
+        "above"
+    ],
+    "wait on": [
+        "right of",
+        "left of"
+    ]
+}

@@ -58,6 +58,8 @@ class SupervisedTrainer(object):
         fg_inds = entry['fg_inds'].long()
         bg_imgs = entry['background'].float()
         fg_onehots = indices2onehots(fg_inds, self.cfg.output_cls_size)
+        index = entry['index'].long() 
+        ind_lens = entry['ind_lens'].long()
 
         ################################################
         # Outputs
@@ -70,17 +72,19 @@ class SupervisedTrainer(object):
             input_inds = input_inds.cuda()
             input_lens = input_lens.cuda()
             fg_onehots = fg_onehots.cuda()
+            index = index.cuda()
+            ind_lens = ind_lens.cuda()
             bg_imgs = bg_imgs.cuda()
             gt_inds = gt_inds.cuda()
             gt_msks = gt_msks.cuda()
         
-        return input_inds, input_lens, bg_imgs, fg_onehots, gt_inds, gt_msks, gt_scene_inds
+        return input_inds, input_lens, bg_imgs, fg_onehots,index, ind_lens, gt_inds, gt_msks, gt_scene_inds
     
     def evaluate(self, inf_outs, ref_inds, ref_msks):
         ####################################################################
         # Prediction loss
         ####################################################################
-        _, _, _, enc_msks, what_wei, where_wei = inf_outs
+        _, _, _, enc_msks, what_wei, where_wei ,_= inf_outs
 
         if self.cfg.cuda and self.cfg.parallel:
             net = self.net.module
@@ -278,7 +282,7 @@ class SupervisedTrainer(object):
             ##################################################################
             ## Batched data
             ##################################################################
-            input_inds, input_lens, bg_imgs, fg_onehots, \
+            input_inds, input_lens, bg_imgs, fg_onehots, index, ind_lens,\
             gt_inds, gt_msks, gt_scene_inds = \
                 self.batch_data(batched)
             gt_scenes = [deepcopy(train_db.scenedb[x]) for x in gt_scene_inds]
@@ -290,7 +294,7 @@ class SupervisedTrainer(object):
             self.net.zero_grad()
 
             if self.cfg.teacher_forcing:
-                inf_outs, _ = self.net((input_inds, input_lens, bg_imgs, fg_onehots))
+                inf_outs, _ = self.net((input_inds, input_lens, bg_imgs, fg_onehots,index, ind_lens))
             else:
                 inf_outs, _ = net.inference(input_inds, input_lens, -1, -0.1, 0, gt_inds)
 
@@ -300,7 +304,7 @@ class SupervisedTrainer(object):
             # print('where_decoder: ', self.net.where_decoder.training)
 
             pred_loss, attn_loss, eos_loss, pred_accu = self.evaluate(inf_outs, gt_inds, gt_msks)
-            loss = pred_loss + attn_loss + eos_loss
+            loss = pred_loss + attn_loss + eos_loss + inf_outs[6]
             loss.backward()
             optimizer.step()
 

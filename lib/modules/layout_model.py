@@ -298,22 +298,22 @@ class DrawModel(nn.Module):
         return sample_inds
 
     def forward(self, inputs):
-        input_inds, input_lens, input_bg_imgs, input_fg_onehots = inputs
-        return self.teacher_forcing(input_inds, input_lens, input_bg_imgs, input_fg_onehots)
+        input_inds, input_lens, input_bg_imgs, input_fg_onehots ,index, ind_lens= inputs
+        return self.teacher_forcing(input_inds, input_lens, input_bg_imgs, input_fg_onehots,index, ind_lens)
 
-    def teacher_forcing(self, input_inds, input_lens, input_bg_imgs, input_fg_onehots):
+    def teacher_forcing(self, input_inds, input_lens, input_bg_imgs, input_fg_onehots,index, ind_lens):
         
         bgfs = self.image_encoder(input_bg_imgs)
-        encoder_states = self.text_encoder(input_inds, input_lens)
-        enc_rfts, enc_embs, enc_msks, enc_hids = encoder_states 
+        encoder_states = self.text_encoder(input_inds, input_lens,index, ind_lens)
+        enc_rfts, enc_embs, enc_msks, enc_hids ,index,ind_lens= encoder_states 
 
         prev_states = (bgfs, input_fg_onehots[:,:-1], None)
         what_states = self.what_decoder(prev_states, encoder_states)
-        obj_logits, rnn_outs, nxt_hids, prev_bgfs, what_ctx, what_wei = what_states
+        obj_logits, rnn_outs, nxt_hids, prev_bgfs, what_ctx, what_wei ,l1= what_states
 
         where_inputs = (rnn_outs, input_fg_onehots[:,1:], prev_bgfs, what_ctx)
         where_states = self.where_decoder(where_inputs, encoder_states)
-        coord_logits, attri_logits, where_ctx, where_wei = where_states
+        coord_logits, attri_logits, where_ctx, where_wei ,l2= where_states
 
         # inf_outs = {}
         # inf_outs['obj_logits']   = what_states['obj_logits']
@@ -325,7 +325,7 @@ class DrawModel(nn.Module):
         # if self.cfg.where_attn > 0:
         #     inf_outs['where_att_logits'] = where_states['attn_wei']
     
-        inf_outs = (obj_logits, coord_logits, attri_logits, enc_msks, what_wei, where_wei)
+        inf_outs = (obj_logits, coord_logits, attri_logits, enc_msks, what_wei, where_wei, l1+l2)
 
         return inf_outs, None
 
@@ -338,7 +338,7 @@ class DrawModel(nn.Module):
         sample_inds            (bsize, tlen, 4)
         """
 
-        obj_logits, coord_logits, attri_logits, _, _, _ = inf_outs
+        obj_logits, coord_logits, attri_logits, _, _, _ ,_= inf_outs
         
         obj_inds   = sample_inds[:, :, 0].unsqueeze(-1)
         coord_inds = sample_inds[:, :, 1].unsqueeze(-1)
@@ -374,7 +374,7 @@ class DrawModel(nn.Module):
         sample_inds            (bsize, tlen, 4)
         """
 
-        obj_logits, coord_logits, attri_logits, _, _, _ = inf_outs
+        obj_logits, coord_logits, attri_logits, _, _, _ ,_= inf_outs
 
         obj_inds   = sample_inds[:, :, 0]
         coord_inds = sample_inds[:, :, 1]

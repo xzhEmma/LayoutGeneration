@@ -83,7 +83,7 @@ class TextEncoder(nn.Module):
         
         return hs
 
-    def forward(self, input_inds, input_lens):
+    def forward(self, input_inds, input_lens,index, ind_lens):
         """
         Args:
             - **input_inds**  (bsize, slen) or (bsize, 3, slen)
@@ -163,6 +163,8 @@ class TextEncoder(nn.Module):
         out['rfts'] = out_rfts
         out['embs'] = out_embs
         out['msks'] = out_msks
+        out['index'] = index
+        out['ind_lens'] =  ind_lens
 
         if len(out_cels) > 0:
             out_cels = torch.cat(out_cels, 1).contiguous()
@@ -170,7 +172,7 @@ class TextEncoder(nn.Module):
         else:
             out['hids'] = out_hids
     
-        return out['rfts'], out['embs'], out['msks'], out['hids']
+        return out['rfts'], out['embs'], out['msks'], out['hids'],out['index'],out['ind_lens']
 
 
 class VolumeEncoder(nn.Module):

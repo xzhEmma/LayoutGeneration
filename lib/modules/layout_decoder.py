@@ -71,7 +71,7 @@ class WhatDecoder(nn.Module):
             #     in_dim += bgf_dim
             if self.cfg.use_fg_to_pred == 2:
                 in_dim += fgf_dim
-            self.attention = Attention(config.attn_type, out_dim, in_dim)
+            self.attention = Attention(config.attn_type, out_dim, in_dim,config)
 
         #################################################################
         # Object decoder
@@ -166,7 +166,7 @@ class WhatDecoder(nn.Module):
         # Conv RNN
         #################################################################
         prev_bgfs, prev_fgfs, prev_hids = prev_states
-        enc_rfts, enc_embs, enc_msks, enc_hids = encoder_states 
+        enc_rfts, enc_embs, enc_msks, enc_hids ,index,index_lens= encoder_states 
 
 
         bsize, tlen, bgf_dim, gh, gw = prev_bgfs.size()
@@ -220,7 +220,7 @@ class WhatDecoder(nn.Module):
             # print('encoder_feats ', encoder_feats.size())
             # encoder_msks = encoder_states['msks']
             # print('encoder_msks ', encoder_msks.size())
-            att_ctx, att_wei = self.attention(att_src, encoder_feats, enc_msks)
+            att_ctx, att_wei,l = self.attention(att_src, encoder_feats, enc_msks,index,index_lens)
             # print('att_ctx ', att_ctx.size())
             # print('att_wei ', att_wei.size())
 
@@ -253,7 +253,7 @@ class WhatDecoder(nn.Module):
         #     what_outs['attn_wei'] = att_wei
 
         
-        return obj_logits, rnn_outs, nxt_hids, prev_bgfs, att_ctx, att_wei
+        return obj_logits, rnn_outs, nxt_hids, prev_bgfs, att_ctx, att_wei, l
 
     def init_state(self, encoder_hidden):
         if isinstance(encoder_hidden, tuple):
@@ -305,7 +305,7 @@ class WhereDecoder(nn.Module):
                 out_dim += emb_dim
             if self.cfg.where_attn == 2:
                 in_dim += out_dim
-            self.attention = Attention(config.attn_type, out_dim, in_dim)
+            self.attention = Attention(config.attn_type, out_dim, in_dim,config)
             # print('in_dim',  in_dim)
             # print('out_dim', out_dim)
 
@@ -403,7 +403,7 @@ class WhereDecoder(nn.Module):
         """
 
         rnn_outs, curr_fgfs, prev_bgfs, what_ctx = what_states
-        enc_rfts, enc_embs, enc_msks, enc_hids = encoder_states
+        enc_rfts, enc_embs, enc_msks, enc_hids, index,ind_lens= encoder_states
 
         bsize, tlen, fgf_dim = curr_fgfs.size()
         bsize, tlen, tgt_dim, gh, gw = rnn_outs.size()
@@ -428,7 +428,7 @@ class WhereDecoder(nn.Module):
                 else:
                     query = torch.cat([curr_fgfs, what_ctx], -1)
                 # print('query', query.size())    
-                att_ctx, att_wei = self.attention(query, encoder_feats, enc_msks)
+                att_ctx, att_wei,l = self.attention(query, encoder_feats, enc_msks, index,ind_lens)
             
             bsize, tlen, att_dim = att_ctx.size()
             # Replicate  
@@ -515,5 +515,5 @@ class WhereDecoder(nn.Module):
         #     where_outs['attn_ctx'] = att_ctx
         #     where_outs['attn_wei'] = att_wei
 
-        return coord_logits, attri_logits, att_ctx, att_wei
+        return coord_logits, attri_logits, att_ctx, att_wei,l
 
