@@ -1,5 +1,6 @@
+#Triplet-Based Layout Generation
 
-# Modified from [Text2Scene: Generating Compositional Scenes from Textual Descriptions ](https://arxiv.org/abs/1809.01110)
+## Modified from [Text2Scene: Generating Compositional Scenes from Textual Descriptions ](https://arxiv.org/abs/1809.01110)
 Fuwen Tan, Song Feng, Vicente Ordonez. CVPR 2019
 
 
@@ -20,7 +21,7 @@ python -m nltk.downloader all						# Install NLTK data
 - Please also install [pytorch](http://pytorch.org/) 1.0 (or higher), torchVision, and torchtext
 - Install the repo
 ```bash
-git clone 
+git clone https://github.com/xzhEmma/LayoutGeneration.git
 cd LayoutGeneration/lib
 make
 cd ..
