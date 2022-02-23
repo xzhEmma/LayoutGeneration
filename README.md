@@ -1,4 +1,4 @@
-#Triplet-Based Layout Generation
+# Triplet-Based Layout Generation
 
 ## Modified from [Text2Scene: Generating Compositional Scenes from Textual Descriptions ](https://arxiv.org/abs/1809.01110)
 Fuwen Tan, Song Feng, Vicente Ordonez. CVPR 2019
